@@ -1,0 +1,38 @@
+.toggle {
+  width: 40px;
+  label {
+    position: relative;
+    display: block;
+    width: 38px;
+    height: 16px;
+    cursor: pointer;
+    background-color: #e8e8e9;
+    border-radius: 8px;
+    box-shadow: inset rgba(0, 0, 0, 0.1) 1px 1px 1px;
+    &:before {
+      position: absolute;
+      left: -2px;
+      top: -7px;
+      content: '\e62c';
+      font-family: iconfont;
+      font-size: 22px;
+      display: block;
+      width: 20px;
+      height: 20px;
+      color: #ff4234;
+      cursor: pointer;
+      -webkit-transition: left 0.2s 0s ease;
+      -moz-transition: left 0.2s 0s ease;
+      transition: left 0.2s 0s ease;
+    }
+  }
+  &.checked {
+    label {
+      &:before {
+        content: '\e62c';
+        color: #41c641;
+        left: 18px;
+      }
+    }
+  }
+}

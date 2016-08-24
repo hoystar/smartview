@@ -1,0 +1,20 @@
+<div class="app-modal intelligent-find-modal">
+  <div class="modal-header app-modal-header">
+    <h5>智能发现</h5>
+  </div>
+  <div class="app-modal-container">
+    <div class="list-group canvas-list">
+      <a href="#" class="list-group-item" ng-repeat="item in modal.list" ng-click="modal.draw(item)" ng-class="{'active':modal.currentItemIndex===$index}">
+                推荐方案{{$index}}
+                <span class="score">分数:{{item.weights}}</span>
+            </a>
+    </div>
+    <svg id="intelligent-canvas" class="dag-svg">
+    </svg>
+  </div>
+  <div class="modal-footer app-modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="modal.addToView()">添加到视图</button>
+    <!-- <button class="btn btn-primary" type="button" ng-click="modal.comfirmAll()">全部确认</button> -->
+    <button class="btn btn-warning" type="button" ng-click="modal.cancel()">取消</button>
+  </div>
+</div>

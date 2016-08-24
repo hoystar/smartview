@@ -1,0 +1,146 @@
+<header-bar></header-bar>
+<div class="clusterDetailPage">
+  <div bread-crumbs></div>
+  <div class="container">
+    <h2>secbase.adl_cloudsec_abnormal_cmd</h2>
+    <ul class="nav nav-tabs nav-justified">
+      <li ng-repeat="item in page.navs" ng-class="{'active':item.value===page.currentTag}" ng-click="page.changeTag(item)">
+        <a href="javascript:;">{{item.text}}</a>
+      </li>
+    </ul>
+    <div class="info-box" ng-if="page.currentTag==='FieldDetail'">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>字段名称</th>
+            <th>类型</th>
+            <th>描述</th>
+            <th>资产等级</th>
+            <th>安全等级</th>
+            <th>热度</th>
+            <th>主／外键</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>server_send</td>
+            <td>string</td>
+            <td>发送服务器</td>
+            <td>D4</td>
+            <td>C2</td>
+            <td>50%</td>
+            <td>外键</td>
+            <td>
+              <a href="">详细</a>
+              <a href="">更多</a>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>store_file</td>
+            <td>string</td>
+            <td>存储文件</td>
+            <td>D4</td>
+            <td>C2</td>
+            <td>50%</td>
+            <td>外键</td>
+            <td>
+              <a href="">详细</a>
+              <a href="">更多</a>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>gmt_send</td>
+            <td>string</td>
+            <td>存储文件</td>
+            <td>D4</td>
+            <td>C2</td>
+            <td>50%</td>
+            <td>外键</td>
+            <td>
+              <a href="">详细</a>
+              <a href="">更多</a>
+            </td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>ip</td>
+            <td>string</td>
+            <td>存储文件</td>
+            <td>D4</td>
+            <td>C2</td>
+            <td>50%</td>
+            <td>外键</td>
+            <td>
+              <a href="">详细</a>
+              <a href="">更多</a>
+            </td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>hostname</td>
+            <td>string</td>
+            <td>存储文件</td>
+            <td>D4</td>
+            <td>C2</td>
+            <td>50%</td>
+            <td>外键</td>
+            <td>
+              <a href="">详细</a>
+              <a href="">更多</a>
+            </td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>gmt_create_unix</td>
+            <td>string</td>
+            <td>存储文件</td>
+            <td>D4</td>
+            <td>C2</td>
+            <td>50%</td>
+            <td>外键</td>
+            <td>
+              <a href="">详细</a>
+              <a href="">更多</a>
+            </td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>gmt_create</td>
+            <td>string</td>
+            <td>存储文件</td>
+            <td>D4</td>
+            <td>C2</td>
+            <td>50%</td>
+            <td>外键</td>
+            <td>
+              <a href="">详细</a>
+              <a href="">更多</a>
+            </td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>uid</td>
+            <td>string</td>
+            <td>存储文件</td>
+            <td>D4</td>
+            <td>C2</td>
+            <td>50%</td>
+            <td>外键</td>
+            <td>
+              <a href="">详细</a>
+              <a href="">更多</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="info-box" ng-if="page.currentTag==='ClusterDetail'">
+      <div cluster-dag></div>
+    </div>
+  </div>
+</div>

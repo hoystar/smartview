@@ -1,0 +1,121 @@
+<div class="">
+  <loading ng-show="show.loading"></loading>
+  <div id="cavcan" ng-show="!show.loading">
+    <div id="left">
+      <div class="table-responsive grid-left">
+        <!--***ng-table start**-->
+        <table ng-table="tableParams" class="table tab_css_1 table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th>
+                  <div class="out font">
+                    <b>维度</b>
+                    <em>数值</em>
+                  </div>
+              </th>
+              <th ng-repeat="structure in show.MyStruct">
+                  <div class="out">
+                    <b>
+                      <label>
+                        <input type="checkbox" ng-model="structure.isWd" ng-click="show.showCondition()">                 
+                      </label>
+                    </b>
+                    <em>
+                      <label>
+                        <input type="checkbox" ng-model="structure.isValue" ng-click="show.showCondition()">
+                      </label>
+                    </em>
+                  </div> 
+              </th>
+            </tr>  
+            <tr>
+              <th>序号</th>
+              <th ng-repeat="structure in show.structure">
+                    {{structure.name}}
+              </th>
+            </tr> 
+          </thead>
+          <tbody>
+            <tr class="tr_css" ng-repeat="result in $data">
+              <td>{{$index+1}}
+              </td>
+              <td ng-repeat="(key,value) in result">
+                {{value}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!--***ng-table end**-->
+      </div>
+    </div><!--left end-->
+    <div id="right" class="grid-right">
+        <table class="table table-striped table-hover" id="htable">
+          <tr>
+            <td>
+              <label>
+                <input type="radio" name="echart" ng-disabled="show.pieIsDisabled" value="pie" ng-model="show.isChecked" ng-click="show.showEchart('pie')">
+                <span>饼图</span>
+              </label>
+            </td>
+            <td>
+              <label>
+                <input type="radio" name="echart" ng-disabled="show.lineIsDisabled" value="line" ng-model="show.isChecked" ng-click="show.showEchart('line')">
+                <span>折线图</span>
+              </label>
+            </td>
+            <td>
+              <label>
+                <input type="radio" name="echart" ng-disabled="show.horizontalBarIsDisabled" value="horizontalBar" ng-model="show.isChecked" ng-click="show.showEchart('horizontalBar')">
+                <span>条形图</span>
+              </label>
+            </td>
+            <td>
+              <label>
+                <input type="radio" name="echart" ng-disabled="show.columnIsDisabled" value="column" ng-model="show.isChecked" ng-click="show.showEchart('column')">
+                <span>柱状图</span>
+              </label>
+            </td>
+            <td>
+              <label>
+                <input type="radio" name="echart" ng-disabled="show.areaIsDisabled"  value="area" ng-model="show.isChecked" ng-click="show.showEchart('area')">
+                <span>面积图</span>
+              </label>
+            </td>
+            <td>
+              <label>
+                <input type="radio" name="echart" ng-disabled="show.radarIsDisabled" value="radar" ng-model="show.isChecked"  ng-click="show.showEchart('radar')">
+                <span>雷达图</span>
+              </label>
+            </td>
+            <td>
+              <label>
+                <input type="radio" name="echart" ng-disabled="show.scatterIsDisabled" value="scatter"  ng-model="show.isChecked"  ng-click="show.showEchart('scatter')">
+                <span>散点图</span>
+              </label>
+            </td>
+          </tr>
+        </table>
+      <div ng-show="show.showEchart.show_line" ng-if="show.showEchart.show_line">
+        <line legend="show.legend" item="show.item" title="show.title" stack="show.stack" data="show.data"></line>
+      </div>
+      <div ng-show="show.showEchart.show_column" ng-if="show.showEchart.show_column">
+        <column legend="show.legend" item="show.item" title="show.title" stack="show.stack" data="show.data"></column>
+      </div>
+      <div ng-show="show.showEchart.show_horizontalBar" ng-if="show.showEchart.show_horizontalBar">
+        <horizontal-bar legend="show.legend" item="show.item" title="show.title" stack="show.stack" data="show.data"></horizontal-bar>
+      </div>
+      <div ng-show="show.showEchart.show_radar" ng-if="show.showEchart.show_radar">
+        <radar legend="show.legend" item="show.item" title="show.title" max="show.max" data="show.data"></radar>
+      </div>
+      <div ng-show="show.showEchart.show_pie" ng-if="show.showEchart.show_pie">
+        <pie legend="show.legend" item="show.item" title="show.title" pie-data="show.dataP"></pie>
+      </div>
+      <div ng-show="show.showEchart.show_area" ng-if="show.showEchart.show_area">
+        <area legend="show.legend" item="show.item" title="show.title" stack="show.stack" data="show.data"></area>
+      </div>
+      <div ng-show="show.showEchart.show_scatter" ng-if="show.showEchart.show_scatter">
+        <scatter legend="show.legend" title="show.title" data="show.data"></scatter>
+      </div>
+    </div><!--right end-->
+  </div>
+</div>

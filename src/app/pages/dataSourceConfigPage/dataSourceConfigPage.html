@@ -1,0 +1,59 @@
+<div class="data-source-page">
+  <h3>数据连接管理</h3>
+  <div class="tool-bar">
+    <div class="input-group">
+      <input type="text" class="form-control search-input" placeholder="输入搜索的关键字">
+      <span class="input-group-btn">
+              <button class="btn btn-default search-btn" type="button" ng-click="searchBar.search()">
+                <i class="iconfont">&#xe600;</i>
+              </button>
+            </span>
+    </div>
+    <div class="btn-bar">
+      <button class="btn btn-primary" ng-click="page.addDataSourceModal()">添加数据连接</button>
+    </div>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>名称</th>
+        <th>数据源标识</th>
+        <th>类型</th>
+        <th>描述</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="item in page.list">
+        <td>{{item.guid}}</td>
+        <td>{{item.showName}}</td>
+        <td>{{item.type}}</td>
+        <td>{{item.comment}}</td>
+        <td>
+          <a href="#" ng-click="page.editDataSourceModal(item)">编辑</a>
+          <a href="#" ng-click="page.deleteDataSourceModal(item)">删除</a>
+          <a href="#" ng-click="page.gotoTopology(item.dsId)">数据拓扑</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pagination-box">
+    <ul class="pagination">
+      <li>
+        <a href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+      <li>
+        <a href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="sv-nav" ng-class="{'welcome-nav':headerBar.isWelcome}">
+  <div class="title">
+    <a href="/page/welcome">
+      <span>Smart</span>
+      <span class="opacity-span">View</span>
+    </a>
+  </div>
+  <ul class="menu">
+    <li>
+      <a ui-sref="treePage.smartview" ng-click="headerBar.toDefaultPage()">视 图</a>
+    </li>
+    <li>
+      <a ng-click="headerBar.gotoExplorePage()">探 索</a>
+    </li>
+    <li>
+      <a href="/page/smartview/subcirbeDataPage">订 阅</a>
+    </li>
+    <li>
+      <a href="/page/systemConfigPage">系统设置</a>
+    </li>
+    <li>
+      <a href="#">帮助中心</a>
+    </li>
+  </ul>
+  <div class="search-box">
+    <div class="input-group">
+      <input type="text" class="form-control search-input" ng-model="headerBar.keyword" placeholder="搜索">
+      <span class="input-group-btn">
+        <button class="btn btn-default search-btn" type="button" ng-click="headerBar.search()">
+          <i class="iconfont">&#xe600;</i>
+        </button>
+      </span>
+    </div>
+  </div>
+  <div class="header-result-box">
+    <div class="header-result-item" ng-repeat="item in headerBar.cmsearch">
+      <p class="header-result-item-row" ng-if="item.type===1">
+        <a href="/page/smartview/entityPage?code={{item.code}}" target="_blank">{{item.code}}</a>
+      </p>
+      <p class="header-result-item-row" ng-if="item.type===1">
+        <label for="">类型:</label>
+        <span class="header-text">实体</span>
+      </p>
+      <p class="header-result-item-row" ng-if="item.type===2">
+        <a href="/page/smartview/relationPage?code={{item.code}}" target="_blank">{{item.name}}</a>
+      </p>
+      <p class="header-result-item-row" ng-if="item.type===2">
+        <label for="">类型:</label>
+        <span class="header-text">关系</span>
+      </p>
+      <p class="header-result-item-row">
+        <label for="">描述:</label>
+        <span class="header-text header-des">{{item.description}}</span>
+      </p>
+    </div>
+  </div>
+  <div class="tool-group">
+    <span class="header-user">Admin</span>
+    <i class="iconfont">&#xe622;</i>
+    <i class="iconfont">&#xe621;</i>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="second-step">
+    <form class="step-tool-bar form-horizontal">
+        <div class="tool-bar-er-select form-group">
+            <div class="col-sm-12">
+                <ui-select on-select="secondStep.addItemToTagSelect($item)" ng-model="secondStep.ERSearch.ERSelected" title="搜选实体或关系" append-to-body="true" theme="select2" class="tool-bar-er-select-button">
+                    <ui-select-match placeholder="搜选实体或关系">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="item in secondStep.ERSearch.ERData" refresh="secondStep.fetchData($select.search)" refresh-delay="500">
+                        <span> {{item.name}}({{secondStep.getERType(item.domainType)}})</span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="form-group" ng-show="secondStep.ERSearch.ERSelected != null">
+            <div class="col-sm-12">
+                请点击添加标签：
+            </div>
+        </div>
+        <div class="list-container form-group" ng-show="secondStep.ERSearch.ERSelected != null">
+            <div class="col-sm-12">
+                <ul>
+                    <li class="tag-color" ng-repeat="item in secondStep.tagSearch.tagData" ng-click="secondStep.addItemToContainer(item)">{{item.name}}</li>
+                </ul>
+            </div>
+        </div>
+    </form>
+    <ul class="nav nav-tabs nav-justified">
+        <li role="presentation" ng-repeat="item in secondStep.navs" ng-class="{'active':item.key===secondStep.activeItem}" ng-click="secondStep.changeNav(item)">
+            <a href="#">{{item.value}}</a>
+        </li>
+    </ul>
+    <div class="condition-container" ng-show="secondStep.activeItem==='input'">
+        <tree-dag data="data"></tree-dag>
+    </div>
+    <div class="condition-container" ng-show="secondStep.activeItem==='output'">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>标签名称</th>
+                    <th>code</th>
+                    <th>实体(关系)名</th>
+                    <th>类型</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody class="condition-table">
+                <tr ng-repeat="item in data.secondStep.outputData.tags">
+                    <td class="condition-name">
+                        <span uib-tooltip="{{item.name}}" tooltip-placement="left">{{item.name}}</span>
+                    </td>
+                    <td class="condition-code">
+                        <span uib-tooltip="{{item.code}}" tooltip-placement="left">{{item.code}}</span>
+                    </td>
+                    <td class="condition-ERname">
+                        <span uib-tooltip="{{item._obj.name}}" tooltip-placement="left">{{item._obj.name}}</span>
+                    </td>
+                    <td class="condition-type">
+                        <span uib-tooltip="{{secondStep.getERType(item._obj.type)}}" tooltip-placement="left">{{secondStep.getERType(item._obj.type)}}</span>
+                    </td>
+                    <td class="condition-actions">
+                        <a ng-click="secondStep.removeItemToContainer(item)">删除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

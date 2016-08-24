@@ -1,0 +1,19 @@
+<div class="inst-page">
+  <div>
+    <ul class="nav nav-tabs">
+      <li role="presentation" ng-repeat="item in inistResult.navs" ng-class="{'active':item===inistResult.currentTag,'disabled':!item.clickable}" ng-click="inistResult.changeTag(item)">
+        <a>{{item.value}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="inst-page-container" ng-if="inistResult.currentTag.key==='info'">
+    <scheduler-info scheduler-data="inistResult.schedulerInfo" scheduler-canvas-id="inistResult.canvasId"></scheduler-info>
+    <!-- <instance-info instance-data="inistResult.instanceInfo" instance-canvas-id="inistResult.canvasId"></instance-info> -->
+  </div>
+  <div class="inst-page-container" ng-if="inistResult.currentTag.key==='process'">
+    <instance-process scheduler-data="inistResult.schedulerProcess"></instance-process>
+  </div>
+  <div class="inst-page-container" ng-if="inistResult.currentTag.key==='show'">
+    <instance-show scheduler-data="inistResult.schedulerShow"></instance-show>
+  </div>
+</div>

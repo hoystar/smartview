@@ -1,0 +1,16 @@
+<div class="datepicker-container" >
+    <div class="datepicker-group">
+        <input type="text" class="form-control" uib-datepicker-popup ng-model="dtPicker.dt"
+               is-open="dtPicker.opened"   datepicker-options="dtPicker.options"
+               ng-required="true" close-text="Close" readonly/>
+         <span class="input-group-btn">
+         <button type="button" class="btn btn-default" ng-click="dtPicker.openTimePicker($event)">
+             <i class="glyphicon glyphicon-calendar"></i>
+         </button>
+         </span>
+    </div>
+    <div class="timepicker-group" ng-if="dtPicker.showTime">
+        <uib-timepicker show-seconds="true" ng-model="dtPicker.timePickerDT" show-meridian="false">
+        </uib-timepicker>
+    </div>
+</div>

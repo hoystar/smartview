@@ -1,0 +1,59 @@
+.second-step {
+    padding: 10px;
+    .step-tool-bar {
+        font-size: 12px;
+        .tool-bar-er-select-button {
+            width: 100%;
+        }
+        .tool-bar-tags-area {
+            ul {
+                max-height: 100px;
+                overflow: scroll;
+                li {
+                    float: left;
+                    text-align: center;
+                    padding: 3px 20px;
+                    background-color: #4f7cd4;
+                    color: #fff;
+                    font-size: 12px;
+                    font-family: "micro yahei";
+                    list-style: none;
+                    margin-right: 10px;
+                    margin-bottom: 5px;
+                }
+            }
+        }
+    }
+    .nav {
+        li {
+            a {
+                padding: 5px 10px !important;
+            }
+        }
+    }
+    .condition-table {
+        td {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            &.condition-name {
+                max-width: 75px;
+            }
+            &.condition-code {
+                max-width: 150px;
+            }
+            &.condition-type {
+                max-width: 30px;
+            }
+            &.condition-ERname {
+                max-width: 70px;
+            }
+            &.condition-actions {
+                max-width: 70px;
+            }
+            .tooltip-inner{
+                max-width:300px;
+            }
+        }
+    }
+}

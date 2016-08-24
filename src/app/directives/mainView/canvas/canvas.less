@@ -1,0 +1,200 @@
+.dag-box {
+  position: relative;
+  height: calc(~"100% - 30px");
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  .tool-bar {
+    height: 34px;
+    .item {
+      float: left;
+      padding: 0;
+      button {
+        border: none;
+        border-radius: 0;
+        i.iconfont {
+          color: #49a8e9;
+          font-size: 18px !important;
+          &.detect-icon {
+            font-size: 14px;
+          }
+        }
+      }
+      .conditionButton {
+        float: right;
+        border: none;
+        border-radius: 0;
+        i.iconfont {
+          color: #49a8e9;
+          font-size: 18px !important;
+          &.detect-icon {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .item-right {
+      float: right;
+      padding: 0;
+      margin-right: 15px;
+      button {
+        border: none;
+        border-radius: 0;
+        i.iconfont {
+          color: #000;
+          &.detect-icon {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .item-view-select {
+      float: right;
+      padding: 0;
+      margin-top: 8px;
+      margin-right: 15px;
+      toggle {
+        position: absolute;
+        margin-top: 10px;
+      }
+      div {
+        float: left
+      }
+    }
+  }
+  .svg-container {
+    position: relative;
+    z-index: 1;
+    height: calc(~"100% - 34px")
+  }
+  .cxt-menu {
+    .dropdown-menu {
+      min-width: 105px;
+    }
+  }
+}
+
+.dag-svg {
+  .node {
+    stroke: #ccc;
+    stroke-width: 1.7px;
+    cursor: move;
+    .node-container {
+      .iconfont {
+        border-radius: 50%;
+        color: #aaa;
+        cursor: pointer;
+        background-color: #fff;
+      }
+    }
+    .info-container {
+      .iconfont {
+        font-size: 15px;
+        color: #aaa;
+        background-color: #fff;
+      }
+    }
+    &.node-focus {
+      stroke: #ff7500;
+    }
+  }
+  .node-dash {
+    .rect {
+      stroke: #3672ad;
+      stroke-width: 1.5px;
+      stroke-dasharray: 3 3
+    }
+    .diamond {
+      stroke: #2da692;
+      stroke-width: 1.5px;
+      stroke-dasharray: 3 3
+    }
+    .circle {
+      stroke: #2da692;
+      stroke-width: 1.5px;
+      stroke-dasharray: 3 3;
+    }
+  }
+  .link {
+    stroke: #ccc;
+    stroke-width: 1.2px;
+    stroke-opacity: 1;
+    &.link-focus {
+      stroke: #3daefe;
+    }
+    &.link-weight {
+      stroke-width: 4.8px;
+    }
+  }
+  .link-flow {
+    stroke: #ccc;
+    stroke-width: 3px;
+    stroke-opacity: 1;
+    &.link-focus {
+      stroke: #3daefe;
+    }
+  }
+  .label {
+    stroke: #aaa;
+    stroke-width: 0;
+    fill: #aaa;
+    pointer-events: none;
+    font-family: Verdana;
+    font-size: 13px;
+    text-anchor: middle;
+    cursor: move;
+    font-weight: 100;
+  }
+  .nodegroup {
+    .rect {
+      fill: #fff;
+      stroke: #3daefe;
+      &.rect-focus {
+        fill: #f0f9ff;
+      }
+    }
+    .diamond {
+      fill: #fff;
+      stroke: #12dec6;
+      &.diamond-focus {
+        fill: #f0fffd;
+      }
+    }
+    .circle {
+      fill: #fff;
+      stroke: #12dec6;
+      &.diamond-focus {
+        fill: #f0fffd;
+      }
+    }
+  }
+  .annulargroup {
+    .annular-close-btn {
+      color: #999;
+      background-color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+    }
+    path {
+      cursor: pointer;
+      stroke: #fff;
+      stroke-width: 2px;
+      fill: #4584f8;
+      fill-opacity: 0.85;
+      &:hover {
+        fill-opacity: 1;
+        fill: #4f7cd4;
+      }
+    }
+    text {
+      pointer-events: none;
+      cursor: pointer;
+      fill: #fff;
+      font-size: 12px;
+    }
+  } 
+}

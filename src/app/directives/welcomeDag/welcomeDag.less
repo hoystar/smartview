@@ -1,0 +1,43 @@
+.welcome-dag-container {
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  text-anchor: middle;
+  .node,
+  .annular {
+    cursor: pointer;
+    pointer-events: all;
+  }
+  .link {
+    stroke: #fff;
+    stroke-width: 2.2px;
+    stroke-opacity: 0.5;
+  }
+  .label {
+    fill: #fff;
+    font-size: 18px;
+    pointer-events: none;
+  }
+  .icon-container {
+    pointer-events: none;
+    .iconfont {
+      color: #fff;
+      font-size: 26px;
+    }
+  }
+  .annular-group {
+    path {
+      opacity: 0.85;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.75;
+      }
+    }
+    text {
+      pointer-events: none;
+      fill: #666;
+    }
+  }
+}

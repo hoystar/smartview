@@ -1,0 +1,29 @@
+<div class="unpop-modal mark-modal" ng-class="{'open':modal.isOpen===true,'close':modal.isOpen===false}">
+    <div class="switch" ng-click="modal.open()">
+        <i class="iconfont" ng-if="modal.isOpen">&#xe604;</i>
+        <i class="iconfont" ng-if="!modal.isOpen">&#xe605;</i>
+    </div>
+    <div class="header">
+        实体：名称
+    </div>
+    <div class="body">
+        <div class="entity-box">
+            <div class="entity" ng-repeat="item in modal.info.nodes">
+                <div class="name">{{item.name}}</div>
+                <div class="arrow">
+                    <i class="iconfont">&#xe608;</i>
+                </div>
+            </div>
+        </div>
+        <div class="braces">
+            <img src="../../../../assets/imgs/bracket.png">
+        </div>
+        <div class="label-box list-group">
+            <a href="#" class="list-group-item" ng-repeat="item in modal.info.tags">
+                <span>{{item.name}}</span>
+                <i class="iconfont detail-icon" ng-click="modal.gotoTagPage(item)">&#xe60a;</i>
+                <i class="iconfont collect-icon">&#xe609;</i>
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+{
+  "name": "smartView",
+  "version": "0.0.1",
+  "description": "seed project",
+  "main": "index.js",
+  "dependencies": {
+    "@ali/aliyun-naza-multicollection": "0.0.3",
+    "@ali/aliyun-naza-options": "0.0.10",
+    "@ali/aliyun-naza-tree": "0.0.15",
+    "@ali/naza-bootstrap": "~0.1.3",
+    "@ali/naza-left-sidebar": "~0.0.1",
+    "@ali/naza-select2": "0.0.11",
+    "angular": "~1.4.8",
+    "angular-ui-router": "^0.2.15",
+    "co": "~4.6.0",
+    "d3": "^3.3.8",
+    "dagre": "~0.7.4",
+    "dagre-d3": "~0.4.13",
+    "echarts": "~3.1.0",
+    "es6-promise": "~2.2.0",
+    "install": "~0.4.1",
+    "jquery": "^2.2.0",
+    "lodash": "~4.0.0",
+    "moment": "~2.13.0",
+    "ng-table": "~0.8.3",
+    "npm": "~3.5.4",
+    "three.js": "~0.73.2",
+    "wolfy87-eventemitter": "^4.3.0"
+  },
+  "devDependencies": {
+    "@ali/naza-server": "0.3.66",
+    "noty": "^2.3.8"
+  },
+  "scripts": {
+    "start": "tnpm install && node ./node_modules/@ali/naza-server/bin/naza -r",
+    "dev": "tnpm install && node ./node_modules/@ali/naza-server/bin/naza -r",
+    "prop": "tnpm install && node ./node_modules/@ali/naza-server/bin/naza -p",
+    "build": "tnpm install && ./node_modules/@ali/naza-server/bin/naza -b"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.alibaba-inc.com:crazy-wolf/smart-view-front.git"
+  },
+  "author": "无惟",
+  "license": "ISC"
+}

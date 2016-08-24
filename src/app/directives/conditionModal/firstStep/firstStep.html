@@ -1,0 +1,19 @@
+<div class="first-step">
+  <div class="svg-container">
+    <div search-bar ng-if="step===1" type="firstStep.SEARCHTYPE"></div>
+    <svg id="step-svg-canvas" class="dag-svg">
+      <!-- 预设置箭头 -->
+      <defs>
+        <marker id="arrow" markerUnits="strokeWidth" markerWidth="12" markerHeight="10" viewBox="0 0 12 12" refX="6" refY="6" orient="auto">
+          <path d="M2,2 L10,6 L2,10 L6,6 L2,2" fill="#999"></path>
+        </marker>
+        <marker id="arrow-highlight" markerUnits="strokeWidth" markerWidth="12" markerHeight="10" viewBox="0 0 12 12" refX="6" refY="6" orient="auto">
+          <path d="M2,2 L10,6 L2,10 L6,6 L2,2" fill="#576479"></path>
+        </marker>
+      </defs>
+      <g class="zoom-container"></g>
+    </svg>
+    <div drag-layout type="firstStep.SEARCHTYPE"></div>
+  </div>
+  <content-menu ng-if="step===1" info="firstStep._cxtMenuData" click="firstStep.clickCxtMenuItem"></content-menu>
+</div>

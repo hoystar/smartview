@@ -1,0 +1,126 @@
+<div class="container third-step">
+
+  <div class="row">
+        <div class="col-sm-12">
+            输入：
+        </div>
+    </div>
+    <div class="row list-container">
+        <div class="col-sm-12">
+            <ul>
+                <li class="entity-color" ng-repeat="item in data.secondStep.inputData.tags">{{item.name}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            输出：
+        </div>
+    </div>
+    <div class="row list-container">
+        <div class="col-sm-12">
+            <ul>
+                <li class="entity-color" ng-repeat="item in data.secondStep.outputData.tags">{{item._obj.name}}({{item.name}})</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            探索路径(在已选路径上扩展)：
+        </div>
+    </div>
+    <div class="row list-container">
+        <div class="col-sm-12">
+            <ul class="sumary-tags">
+                <li class="entity-color" ng-class="{'entity-color':item.type == 1,'relation-color':item.type == 2,'unactive':!item.isActive}" ng-repeat="item in data.firstStep.canvasData.vertexs" ng-click="thirdStep.activeEntityAndRelation(item)" ng-if="item.type===2">{{item.content[0].name}}</li>
+            </ul>
+            <ul class="sumary-tags">
+                <li class="entity-color" ng-class="{'entity-color':item.type == 1,'relation-color':item.type == 2,'unactive':!item.isActive}" ng-repeat="item in data.firstStep.canvasData.vertexs" ng-click="thirdStep.activeEntityAndRelation(item)" ng-if="item.type===1">{{item.content[0].name}}</li>
+            </ul>
+        </div>
+    </div>
+    <form class="explore-range-form row list-container" ng-show="true">
+    <loading ng-show="thirdStep.loading"></loading>
+        <div class="label-box">
+            <label class="title col-sm-12">探索范围:</label>
+            <label class="radio-label col-sm-4">
+                <input type="radio" name="radioGroup" ng-click="thirdStep.getContent('PARTITION')" checked="true" /> 所有分区
+            </label>
+            <label class="radio-label col-sm-4">
+                <input type="radio" name="radioGroup" ng-click="thirdStep.getContent('ENTITY')" /> 所有实体
+            </label>
+            <label class="radio-label col-sm-4">
+                <input type="radio" name="radioGroup" ng-click="thirdStep.getContent('RELATION')" /> 所有关系
+            </label>
+        </div>
+        <div class="batch-box col-sm-12">
+            <div ng-repeat=" partition in thirdStep.batchArray">
+                <p class="form-row">
+                    <label class="title">{{partition.condition.name}}:</label>
+                    <select class="form-control" ng-class="{'multiInput':partition.condition.multiValue}" ng-disabled="thirdStep.partitionStatus" ng-change="thirdStep.changeInputType(partition)" ng-model="partition.condition.symbol" ng-options="item.value as item.symbol for item in thirdStep.exploreRange.conditionArray">
+                    </select>
+                    <span class="glyphicon glyphicon-plus partition-icon" ng-if="partition.condition.multiValue" ng-click="thirdStep.exploreRange.addInputBox(partition)"></span>
+                    <div ng-class="{'multiInput':partition.value.length>1}" ng-repeat="item in partition.value">
+                        <div date-time-picker ng-if="item.type==='DATE'" on-change="thirdStep.bathModify(partition)" show-time="partition.condition.type==='DATETIME'" ng-model="item.value"></div>
+                        <div ng-class="{'multiInput':partition.condition.multiValue}" ng-if="item.type==='INPUT'">
+                            <input type="text" class="range-input form-control" ng-change="thirdStep.bathModify(partition)" ng-model="item.value" />
+                        </div>
+                        <span class="glyphicon glyphicon-minus partition-icon" ng-if="partition.condition.multiValue" ng-click="thirdStep.exploreRange.removeInputBox(partition,item)"></span>
+                    </div>
+                </p>
+            </div>
+        </div>
+        <div class="partition-box col-sm-12" ng-show="thirdStep.content==='PARTITION'">
+            <div ng-repeat=" partition in thirdStep.partitionArray">
+                <p class="form-row">
+                    <i class="iconfont partition-icon" ng-if="partition.type==='PARTITION'" ng-click="thirdStep.showExploreRangeModal(partition)">&#xe60a;</i>
+                    <label class="title">{{partition.condition.name}}({{partition.condition.chineseType}}):</label>
+                    <select class="form-control" ng-class="{'multiInput':partition.condition.multiValue}" ng-change="thirdStep.changeInputType(partition)" ng-model="partition.condition.symbol" ng-options="item.value as item.symbol for item in thirdStep.exploreRange.conditionArray">
+                    </select>
+                    <span class="glyphicon glyphicon-plus partition-icon" ng-if="partition.condition.multiValue" ng-click="thirdStep.exploreRange.addInputBox(partition)"></span>
+                    <div ng-class="{'multiInput':partition.value.length>1}" ng-repeat="item in partition.value">
+                        <div date-time-picker on-change="thirdStep.bathModify(partition)" ng-if="item.type==='DATE'" show-time="partition.condition.type==='DATETIME'" ng-model="item.value"></div>
+                        <div ng-class="{'multiInput':partition.condition.multiValue}" ng-if="item.type==='INPUT'">
+                            <input type="text" class="range-input form-control" placeholder="请输入此类分区取值" ng-model="item.value" ng-change="thirdStep.bathModify(partition)" />
+                        </div>
+                        <span class="glyphicon glyphicon-minus partition-icon" ng-if="partition.condition.multiValue" ng-click="thirdStep.exploreRange.removeInputBox(partition,item)"></span>
+                    </div>
+                </p>
+            </div>
+        </div>
+        <div class="entity-box col-sm-12" ng-show="thirdStep.content==='ENTITY'">
+            <div ng-repeat=" partition in thirdStep.entityArray">
+                <p class="form-row">
+                    <label class="title" uib-tooltip="{{partition.condition.tableName}}" tooltip-placement="bottom" tooltip-trigger="mouseenter">{{partition.condition.name}}({{partition.condition.partitionName}}):</label>
+                    <select class="form-control" ng-class="{'multiInput':partition.condition.multiValue}" ng-change="thirdStep.changeInputType(partition)" ng-model="partition.condition.symbol" ng-options="item.value as item.symbol for item in thirdStep.exploreRange.conditionArray">
+                    </select>
+                    <span class="glyphicon glyphicon-plus partition-icon" ng-if="partition.condition.multiValue" ng-click="thirdStep.exploreRange.addInputBox(partition)"></span>
+                    <div ng-class="{'multiInput':partition.value.length>1}" ng-repeat="item in partition.value">
+                        <div date-time-picker ng-if="item.type==='DATE'" show-time="partition.condition.type==='DATETIME'" ng-model="item.value"></div>
+                        <div ng-class="{'multiInput':partition.condition.multiValue}" ng-if="item.type==='INPUT'">
+                            <input type="text" class="range-input form-control" placeholder="请输入分区取值" ng-model="item.value" />
+                        </div>
+                        <span class="glyphicon glyphicon-minus partition-icon" ng-if="partition.condition.multiValue" ng-click="thirdStep.exploreRange.removeInputBox(partition,item)"></span>
+                    </div>
+                </p>
+            </div>
+        </div>
+        <div class="relation-box col-sm-12" ng-show="thirdStep.content==='RELATION'">
+            <div ng-repeat=" partition in thirdStep.relationArray">
+                <p class="form-row">
+                    <label class="title" uib-tooltip="{{partition.condition.tableName}}" tooltip-placement="bottom" tooltip-trigger="mouseenter">{{partition.condition.name}}({{partition.condition.partitionName}}):</label>
+                    <select class="form-control" ng-class="{'multiInput':partition.condition.multiValue}" ng-change="thirdStep.changeInputType(partition)" ng-model="partition.condition.symbol" ng-options="item.value as item.symbol for item in thirdStep.exploreRange.conditionArray">
+                    </select>
+                    <span class="glyphicon glyphicon-plus partition-icon" ng-if="partition.condition.multiValue" ng-click="thirdStep.exploreRange.addInputBox(partition)"></span>
+                    <div ng-class="{'multiInput':partition.value.length>1}" ng-repeat="item in partition.value">
+                        <div date-time-picker ng-if="item.type==='DATE'" show-time="partition.condition.type==='DATETIME'" ng-model="item.value"></div>
+                        <div ng-class="{'multiInput':partition.condition.multiValue}" ng-if="item.type==='INPUT'">
+                            <input type="text" class="range-input form-control" placeholder="请输入分区取值" ng-model="item.value" />
+                        </div>
+                        <span class="glyphicon glyphicon-minus partition-icon" ng-if="partition.condition.multiValue" ng-click="thirdStep.exploreRange.removeInputBox(partition,item)"></span>
+                    </div>
+                </p>
+            </div>
+        </div>
+    </form>
+</div>

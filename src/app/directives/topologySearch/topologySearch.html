@@ -1,0 +1,35 @@
+<div class="topology-search-bar">
+  <div class="content-box" ng-if="!search.isMinimize">
+    <p class="icon-row">
+      <i class="iconfont search-bar-icon drag-icon" title="拖动窗口">&#xe620;</i>
+      <i class="iconfont search-bar-icon mini-icon" title="最小化" ng-click="search.minimize()">&#xe61f;</i>
+    </p>
+    <!-- 非表搜索框 -->
+    <div class="col-lg-6 search-input-box" ng-if="searchBar.searchBar.currentTag!=='Table'">
+      <div class="input-group">
+        <input type="text" class="form-control search-input" placeholder="输入关键字搜索" ng-model="search.keyword" ng-keydown="search.keySearch($event)">
+        <span class="input-group-btn">
+              <button class="btn btn-default search-btn" type="button" ng-click="search.search()">
+                <i class="iconfont">&#xe600;</i>
+              </button>
+            </span>
+      </div>
+    </div>
+  </div>
+  <div class="result-box" ng-if="!search.isMinimize">
+    <div class="result-item" ng-repeat="item in search.list">
+      <div class="info-row" ng-click="search.locatePosition(item)">
+        <label for="">名字:</label>
+        <span>{{item.n}}</span>
+      </div>
+      <div class="info-row" ng-if="item.d" ng-click="search.locatePosition(item)">
+        <label for="">描述:</label>
+        <span>{{item.d}}</span>
+      </div>
+      <input class="result-item-checkbox" type="checkbox" ng-model="item.isSelected" ng-change="search.selectedItem(item)">
+    </div>
+  </div>
+  <div class="minimize-content-box" ng-if="search.isMinimize">
+    <i class="iconfont">&#xe600;</i>
+  </div>
+</div>

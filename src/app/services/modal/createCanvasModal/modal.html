@@ -1,0 +1,38 @@
+<div class="app-modal create-canvas-modal">
+    <div class="modal-header app-modal-header">
+        <h5 ng-if="!modal.isEditMode">创建视图</h5>
+        <h5 ng-if="modal.isEditMode">编辑视图</h5>
+    </div>
+    <div class="app-modal-container">
+        <div class="form-group">
+            <label for="canvas-name">名字</label>
+            <input type="text" class="form-control" id="canvas-name" placeholder="名字" ng-model="modal.config.name">
+        </div>
+        <div class="form-group">
+            <label for="canvas-description">描述</label>
+            <textarea class="form-control" rows="3" id="canvas-description" ng-model="modal.config.description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="canvas-modifier">权限</label>
+            <select class="form-control" ng-model="modal.config.modifier">
+                <option value="1">继承</option>
+                <option value="2">私有</option>
+                <option value="3">可读</option>
+                <option value="4">公开</option>
+            </select>
+        </div>
+        <div class="form-group directory-group" ng-if="!modal.isEditMode">
+            <label for="">存储目录</label>
+            <div>
+                <select class="form-control directory-control directory-1" ng-options="item as item.name for item in modal.folderList1" ng-model="modal.currentFolder1" ng-change="modal.changeFolder1()">
+                </select>
+                <select class="form-control directory-control directory-2" ng-options="item as item.name for item in modal.folderList2" ng-model="modal.currentFolder2">
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer app-modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="modal.submit()">确定</button>
+        <button class="btn btn-warning" type="button" ng-click="modal.cancel()">取消</button>
+    </div>
+</div>

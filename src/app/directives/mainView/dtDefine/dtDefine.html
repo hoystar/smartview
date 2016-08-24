@@ -1,0 +1,103 @@
+<div class="dtDefinePage">
+    <div class="content-container">
+        <div class="graph-box">
+            <div class="tool-bar">
+                <div class="item">
+                  <button type="button" title="编辑探索" class="btn btn-default" ng-click="dtDefine.editExplore()">
+                    <i class="iconfont">&#xe67e;</i>
+                  </button>
+                </div>
+                <div class="item">
+                  <button type="button" title="删除探索" class="btn btn-default" ng-click="dtDefine.deleteExplore()">
+                    <i class="iconfont">&#xe67d;</i>
+                  </button>
+                </div>
+                <div class="item">
+                  <button type="button" title="创建实例" class="btn btn-default" ng-click="dtDefine.execExplore()">
+                    <i class="iconfont">&#xe666;</i>
+                  </button>
+                </div>
+                <div class="item">
+                  <button type="button" title="收藏探索" class="btn btn-default" ng-click="dtDefine.execCollect()">
+                    <i class="iconfont">&#xe64f;</i>
+                  </button>
+                </div>
+            </div>
+            <div id="task-layout-canvas" class="svg-container">
+                <div task-status-dag data="dtDefine.graph" task-status-dag canvas-id="dtDefine.svgCanvasId"></div>
+            </div>
+        </div>
+        <div class="base-info-box">
+            <div>
+                <div class="title">{{defineInfo.name}}</div>
+                <div class="detail-info">
+                    <label for="">拥有者: </label>
+                    <span>{{defineInfo.owner}}</span>
+                </div>
+                <div class="detail-info">
+                    <label for="">描述: </label>
+                    <span>{{defineInfo.description}}</span>
+                </div>
+                <div class="detail-info">
+                    <label for="">最后修改时间: </label>
+                    <span>{{defineInfo.lastModifiedOn}}</span> &nbsp;&nbsp;
+                    <label for="">修改者: </label>
+                    <span>{{defineInfo.lastModifiedBy}}</span>
+                </div>
+                <div class="detail-info">
+                    <label for="">创建时间: </label>
+                    <span>{{defineInfo.createdOn}}</span> &nbsp;&nbsp;
+                    <label for="">创建者: </label>
+                    <span>{{defineInfo.createdBy}}</span>
+                </div>
+            </div>
+            <div class="tab-page">
+                <ul class="nav nav-tabs" ng-init="vm.activeTab=1">
+                    <li ng-class="{active: vm.activeTab == 1}"><a href="javascript:;" ng-click="vm.activeTab = 1">输入</a></li>
+                    <li ng-class="{active: vm.activeTab == 2}"><a href="javascript:;" ng-click="vm.activeTab = 2">输出</a></li>
+                    <li ng-class="{active: vm.activeTab == 3}"><a href="javascript:;" ng-click="vm.activeTab = 3">分区</a></li>
+                </ul>
+                <div class="tab-content tab-bordered">
+                    <div class="tab-panel" ng-show="vm.activeTab == 1">
+                        <dt-define-tree-dag data="defineInfo.conditions" dag-id="dtDefine.dagId"></dt-define-tree-dag>
+                    </div>
+                    <div class="tab-panel" ng-show="vm.activeTab == 2">
+                        <table class="table">
+                            <caption>输出标签</caption>
+                            <tr>
+                                <th>节点编码</th>
+                                <th>类型</th>
+                                <th>标签编码</th>
+                            </tr>
+                            <tr ng-repeat="item in defineInfo.outputItems">
+                                <td class="tag-tabled-item tag-domainCode" ><span uib-tooltip="{{item.domainCode}}">{{item.domainCode}}</span></td>
+                                <td ng-if="item.domainType===1" class="tag-tabled-item tag-type">实体</td>
+                                <td ng-if="item.domainType===2" class="tag-tabled-item tag-type">关系</td>
+                                <td class="tag-tabled-item tag-code" ><span uib-tooltip="{{item.tagCode}}">{{item.tagCode}}</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="tab-panel" ng-show="vm.activeTab==3">
+                        <table class="table">
+                            <caption>分区信息</caption>
+                            <tr>
+                                <th>实体</th>
+                                <th>表名</th>
+                                <th>分区名</th>
+                                <th>运算符</th>
+                                <th>分区值</th>
+                            </tr>
+                            <tr ng-repeat="item in defineInfo.partitions">
+                                <td class="tag-tabled-item " ><span uib-tooltip="{{item.leftValue.value.code}}">{{item.leftValue.value.code}}</span></td>
+                                <td class="tag-tabled-item " ><span uib-tooltip="{{item.leftValue.value.tableName}}">{{item.leftValue.value.tableName}}</span></td>
+                                <td class="tag-tabled-item ">{{item.leftValue.value.partitionName}}</td>
+                                <td class="tag-tabled-item ">{{item.contrast}}</td>
+                                <td class="tag-tabled-item ">{{item.rightValue.value}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

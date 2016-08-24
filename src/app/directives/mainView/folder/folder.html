@@ -1,0 +1,88 @@
+<div class="folder-container">
+  <div class="folder-box" ng-if="folder.folderData.folderStatus===0">
+    <div class="folder-box-left">
+        <div class="nav-title">
+            <ul class="nav nav-tabs">
+                <li role="presentation" ng-repeat="item in folder.navs" ng-class="{'active':folder.currentTag===item.value}" ng-click="folder.changeNav(item.value,$event)">
+                    <a href="#">{{item.text}}</a>
+                </li>            
+            </ul>    
+        </div> 
+        <div class="child-list">
+            <div ng-if="!folder.isFolderBosNotEmpty && folder.currentTag===5">
+                <p class="empty-text">无子域（文件夹）</p>
+            </div>
+            <div ng-if="!folder.isCanvasBosNotEmpty && folder.currentTag===10">
+                <p class="empty-text">无视图</p>
+            </div>                    
+            <div ng-if="folder.isFolderBosNotEmpty">
+                <div class="folder-item" ng-repeat="item in folder.folderData.folderBosList" ng-click="folder.gotoDeeper(item)" ng-if="item.objectType===folder.currentTag && folder.currentTag===5">
+                    <img src="../../../../assets/imgs/folder-closed.png" alt="文件" class="folder-item-img folder-item-img-pic">
+                    <p class="folder-item-title">{{item.name}}</p>
+                </div>
+            </div>
+             <div class="canvas-item" ng-repeat="item in folder.folderData.folderBosList" ng-click="folder.gotoDeeper(item)" ng-if="item.objectType===folder.currentTag && folder.currentTag===10">
+               <img src="../../../../assets/imgs/pre_1.png" alt="视图" class="canvas-item-img canvas-item-img-pic">            
+                <p class="canvas-item-title">{{item.name}}</p>
+            </div>         
+        </div>
+    </div>
+    <div class="folder-box-right">
+        <!-- <div class="info-box">
+            <h4>{{folder.folderData.folderInfo.name}}</h4>
+            <div class="info-row">
+                <div class="info-row-item">
+                    <label for="">拥有者:</label>
+                    <span>{{folder.folderData.folderInfo.owner}}</span>
+                </div>
+                <div class="info-row-item">
+                    <label for="">创建者:</label>
+                    <span>{{folder.folderData.createdBy}}</span>
+                </div>                        
+            </div>  
+
+            <div class="info-row">
+                <div class="info-row-item">
+                    <label for="">父文件夹:</label>
+                    <span>{{folder.folderData.folderInfo.parentName}}</span>   
+                </div>   
+                 <div class="info-row-item">
+                    <label for="">创建时间:</label>
+                    <span>{{folder.folderData.folderInfo.createdOn}}</span>
+                </div>               
+            </div> 
+            <div class="info-row">
+                <label for="">描述:</label>
+                <span>{{folder.folderData.folderInfo.pageDescription}}</span>  
+            </div>  
+        </div> -->
+        <form class="form-horizontal folder-info">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">拥有者：</label>
+                <div class="col-sm-9">{{folder.folderData.folderInfo.owner}}</div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">创建者：</label>
+                <div class="col-sm-9">{{folder.folderData.createdBy}}</div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">父文件夹：</label>
+                <div class="col-sm-9">{{folder.folderData.folderInfo.parentName}}</div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">创建时间：</label>
+                <div class="col-sm-9">{{folder.folderData.folderInfo.createdOn}}</div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">描述：</label>
+                <div class="col-sm-9">{{folder.folderData.folderInfo.pageDescription}}</div>
+            </div>
+        </form>
+    </div>
+  </div>
+
+  <div class="folder-box" ng-if="folder.folderData.folderStatus===1">   
+      <div folder_dag data="folder.folderData"></div> 
+      <drag-layout></drag-layout>
+  </div>
+</div>  

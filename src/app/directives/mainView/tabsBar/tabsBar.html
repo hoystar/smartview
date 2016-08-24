@@ -1,0 +1,33 @@
+
+  <div class="box" id="box">
+    <div class="menu">
+        <ul class="nav nav-tabs sv-mainview-tab" role="tablist">
+          <li role="presentation" data-toggle="tab" ng-repeat="item in tabsBar.Cache.tabsArray" ng-class="{'active':item.onlyKey === tabsBar.Cache.activeTab.onlyKey}">
+            <a href="#" ng-click="tabsBar.active(item)">
+                <i class="iconfont iconfont-color" ng-if="item.type===5">&#xe668;</i><!--标准视图  文件夹-->
+                <i class="iconfont iconfont-color" ng-if="item.type===10">&#xe633;</i><!--标准视图  视图-->
+                <i class="iconfont iconfont-color" ng-if="item.type===20">&#xe654;</i><!--数据探索  数据定义-->
+                <i class="iconfont iconfont-color" ng-if="item.type===21">&#xe67f;</i><!--数据探索  实例-->
+                <i class="iconfont iconfont-color iconfont-size" ng-if="item.type===22">&#xe62c;</i><!--数据探索  实例-->
+                <i class="iconfont iconfont-color" ng-if="item.type===11">&#xe62d;</i><!--发现视图  推荐视图-->
+                <nobr title="{{item.name}}">{{item.name}}</nobr>
+            </a>
+            <span class="closeIcon">
+              <i title="关闭" class="close-tab iconfont" ng-click="tabsBar.removeTab(item.onlyKey)">&#xe623;</i>
+            </span>
+          </li>
+        </ul>
+    </div>
+    <div class="btn-group dropdownWidth" role="group" ng-show="tabsBar.dropDownShow">
+        <button type="button" class="btn btn-default dropdown-toggle btnNoBorder" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="glyphicon glyphicon-triangle-right"><span class="badge">{{tabsBar.Cache.tabsArray.length}}</span></span>
+        </button>
+        <ul class="dropdown-menu dropRight">
+          <li role="presentation" data-toggle="tab" ng-repeat="item in tabsBar.Cache.tabsArray" ng-class="{'active':item.onlyKey === tabsBar.Cache.activeTab.onlyKey}">
+            <a href="#" ng-click="tabsBar.active(item)">
+                {{item.name}}
+            </a>
+          </li>
+        </ul>
+    </div>
+  </div>

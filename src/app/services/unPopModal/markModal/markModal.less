@@ -1,0 +1,71 @@
+.mark-modal {
+    opacity: 1;
+    .switch {
+        position: absolute;
+        top: 50%;
+        left: -20px;
+        width: 20px;
+        height: 20px;
+        color: #ccc;
+        background-color: rgba(255, 255, 255, 0);
+        cursor: pointer;
+    }
+    .header {
+        border-bottom: 1px solid #ececed;
+        height: 50px;
+        line-height: 40px;
+        margin: 0;
+        padding: 10px;
+    }
+    .body {
+        .entity-box {
+            margin-top: 15px;
+            .entity {
+                width: 100%;
+                text-align: center;
+                .name {
+                    display: inline-block;
+                    min-width: 120px;
+                    min-height: 25px;
+                    line-height: 25px;
+                    border: 1px solid #7399ba;
+                    border-radius: 8px;
+                }
+                .arrow {
+                    .iconfont {
+                        color: #4188cc;
+                    }
+                }
+            }
+        }
+        .braces {
+            img {
+                width: 100%;
+            }
+        }
+        .label-box {
+            .list-group-item {
+                position: relative;
+                font-size: 12px;
+                span {
+                    width: 240px;
+                    display: inline-block;
+                }
+            }
+            .iconfont {
+                position: absolute;
+                &.detail-icon {
+                    top: 6px;
+                    right: 4px;
+                }
+                &.collect-icon {
+                    top: 6px;
+                    right: 23px;
+                }
+                &:hover {
+                    color: #ff7500;
+                }
+            }
+        }
+    }
+}

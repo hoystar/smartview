@@ -1,0 +1,13 @@
+<div class="smartview-page">
+  <loading ng-show="page.loading"></loading>
+  <div default ng-if="page.mainViewType===0"></div>
+  <div tabs-bar ng-show="page.mainViewType!==0"></div>
+  <div class="sv-container" ng-if="page.mainViewType!==0">
+    <div canvas ng-if="page.mainViewType===10" canavs-data="page.Cache.activeTab"></div>
+    <div folder ng-if="page.mainViewType===5" folder-info="page.Cache.activeTab"></div>
+    <div dt-define ng-if="page.mainViewType===20" define-info="page.Cache.activeTab"></div>
+    <div dt-instance ng-if="page.mainViewType===21" instance-data="page.Cache.activeTab"></div>
+    <div dt-instance-result ng-if="page.mainViewType===22" instance-data="page.Cache.activeTab"></div>
+    <div canvas ng-if="page.mainViewType===11" canavs-data="page.Cache.activeTab"></div>
+  </div>
+</div>

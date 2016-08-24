@@ -1,0 +1,8 @@
+<div class="nav_container">
+   <ul class="nav_main">
+        <li ng-repeat="item in navBar.folders" >
+        	<span ng-if="$index != 0">/</span>
+        	<a href="#" ng-click="navBar.navigation(item)">{{item.name}}</a>
+     </li>
+    </ul>
+</div>

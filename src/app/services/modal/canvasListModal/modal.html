@@ -1,0 +1,36 @@
+<div class="app-modal canvas-list-modal">
+    <div class="modal-header app-modal-header">
+        <h5>我负责的视图</h5>
+    </div>
+    <div class="app-modal-container">
+        <div class="input-row">
+            <label for="">搜索:</label>
+            <input type="text" class="form-control keyword-input" placeholder="请输入关键字" ng-model="modal.keyword">
+        </div>
+        <!-- 内容 -->
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>名字</th>
+                    <th>拥有者</th>
+                    <th>创建时间</th>
+                    <th>创建人</th>
+                    <th>描述</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in modal.data | filter: modal.keyword" ng-click="modal.selectedItem(item)" ng-class="{'selected':item.isSelected}">
+                    <td>{{item.name}}</td>
+                    <td>{{item.owner}}</td>
+                    <td>{{item.createdOnDate}}</td>
+                    <td>{{item.createdBy}}</td>
+                    <td>{{item.description}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer app-modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="modal.submit()">确定</button>
+        <button class="btn btn-warning" type="button" ng-click="modal.cancel()">取消</button>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+.topology-search-bar {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  left: 264px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 7px 21px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0 7px 21px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 7px 21px rgba(0, 0, 0, 0.25);
+  .content-box {
+    .icon-row {
+      height: 35px;
+      margin: 0;
+      background-color: rgba(255, 255, 255, 0.93);
+      .search-bar-icon {
+        position: absolute;
+        top: 10px;
+        cursor: pointer;
+        color: #797979;
+        &.drag-icon {
+          right: 38px;
+          line-height: 20px;
+        }
+        &.mini-icon {
+          right: 13px;
+        }
+      }
+    }
+    .search-input-box {
+      float: none;
+      padding: 0;
+      width: 350px;
+      border-radius: 4px;
+      .search-input {
+        height: 36px;
+        border: none;
+        box-shadow: none;
+        background-color: rgba(255, 255, 255, 0.93);
+        border-radius: 0 0px 0px 4px;
+      }
+      input::-webkit-input-placeholder {
+        color: #c1c1c1;
+      }
+      .search-btn {
+        border: none;
+        padding: 7px 12px;
+        background-color: rgba(255, 255, 255, 0.93);
+        i {
+          color: #6e6e6e;
+        }
+      }
+    }
+  }
+  .minimize-content-box {
+    background-color: #fff;
+    .iconfont {
+      padding: 8px;
+      line-height: 35px;
+      cursor: pointer;
+    }
+  }
+  .result-box {
+    max-height: 400px;
+    overflow: scroll;
+    background-color: rgba(255, 255, 255, 0.93);
+    .result-item {
+      position: relative;
+      padding: 10px 15px;
+      border-top: 1px dashed #ddd;
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(241, 241, 241, 0.93);
+      }
+      .info-row {
+        width: 320px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        label {
+          font-size: 12px;
+          color: #999;
+          font-weight: normal;
+        }
+        span {
+          font-size: 12px;
+        }
+      }
+      .result-item-checkbox {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        z-index: 1;
+      }
+    }
+  }
+}

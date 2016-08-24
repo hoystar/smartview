@@ -1,0 +1,218 @@
+"use strict";
+
+class PathDag {
+  constructor(option) {
+    this.svg = option.svg;
+    this.height = option.height;
+    this.width = option.width;
+    this.data = {};
+
+    this.isDrawLink = false;
+    this.margin = null;
+    this.diagonal = null;
+    this.tree = null;
+    this.nodeGroup = null;
+    this.linkGroup = null;
+    this.drawGroup = null;
+    this._init();
+  }
+  _init() {
+
+    this.margin = { top: 20, right: 80, bottom: 20, left: 80 };
+    this.duration = 750;
+
+    this.tree = d3.layout.tree()
+      .size([this.height, this.width]);
+
+    this.diagonal = d3.svg.diagonal()
+      .projection(function(d) {
+        return [d.y, d.x];
+      });
+
+    //小心陷阱
+    var container = this.svg
+      .attr("width", this.width + this.margin.right + this.margin.left)
+      .attr("height", this.height + this.margin.top + this.margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+
+
+    this.linkGroup = container
+      .append("g")
+      .attr("class", "link-group");
+
+    this.nodeGroup = container
+      .append("g")
+      .attr("class", "node-group");
+
+    this.drawGroup = container
+      .append("g")
+      .attr("class", "draw-group");
+
+    this._attachDrawEvent();
+  }
+  _attachDrawEvent() {
+    let self = this;
+    // this.drawGroup
+    // 	.select("path")
+    this.svg.on("mousemove", function() {
+      if (!self.isDrawLink) {
+        return;
+      }
+      let pos = d3.mouse(this);
+      self.drawGroup
+        .select("line")
+        .attr("x2", pos[0] - 80)
+        .attr("y2", pos[1] - 20);
+    });
+
+    //影响了后续的交互
+    // this.svg.on("mousedown", function() {
+    //   if (!self.isDrawLink) {
+    //     return;
+    //   }
+    //   self.drawGroup.selectAll("*").remove();
+    //   self.isDrawLink = false;
+    // });
+  }
+  draw(source) {
+
+    var i = 0;
+
+    // Compute the new tree layout.
+    var nodes = this.tree.nodes(source).reverse(),
+      links = this.tree.links(nodes);
+
+    // Normalize for fixed-depth.
+    nodes.forEach(function(d) { d.y = d.depth * 180; });
+
+    // Update the nodes…
+    var node = this.nodeGroup.selectAll("g.node")
+      .data(nodes, function(d) {
+        return d.id || (d.id = ++i);
+      });
+
+    // Enter any new nodes at the parent's previous position.
+    var nodeEnter = node.enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) {
+        return "translate(" + source.y0 + "," + source.x0 + ")";
+      });
+
+    nodeEnter.append("circle")
+      .attr("r", 1e-6)
+      .style("fill", function(d) {
+        return d._children ? "lightsteelblue" : "#fff";
+      });
+
+    nodeEnter.append("circle")
+      .attr("class", "radio")
+      .attr("r", 5)
+      .attr("transform", function(d) {
+        return "translate(" + -18 + "," + 0 + ")";
+      })
+      .on("click", function(d) {
+        if (this.isDrawLink) {
+          this.drawLinkEnd(d);
+        } else {
+          this.drawLinkStart(d);
+        }
+      }.bind(this));
+
+    nodeEnter.append("text")
+      .attr("x", function(d) {
+        return d.children || d._children ? -13 : 13;
+      })
+      .attr("dy", ".35em")
+      .attr("text-anchor", function(d) {
+        return d.children || d._children ? "end" : "start";
+      })
+      .text(function(d) {
+        return d.name;
+      })
+      .style("fill-opacity", 1e-6);
+
+    // Transition nodes to their new position.
+    var nodeUpdate = node.transition()
+      .duration(this.duration)
+      .attr("transform", function(d) {
+        return "translate(" + d.y + "," + d.x + ")";
+      });
+
+    nodeUpdate.select("circle")
+      .attr("r", 10)
+      .style("fill", function(d) {
+        return d._children ? "lightsteelblue" : "#fff";
+      });
+
+    nodeUpdate.select("text")
+      .style("fill-opacity", 1);
+
+    // Transition exiting nodes to the parent's new position.
+    var nodeExit = node.exit().transition()
+      .duration(this.duration)
+      .attr("transform", function(d) {
+        return "translate(" + source.y + "," + source.x + ")";
+      })
+      .remove();
+
+    nodeExit.select("circle")
+      .attr("r", 1e-6);
+
+    nodeExit.select("text")
+      .style("fill-opacity", 1e-6);
+
+    // Update the links…
+    var link = this.linkGroup.selectAll("path.link")
+      .data(links, function(d) {
+        return d.target.id;
+      });
+
+    // Enter any new links at the parent's previous position.
+    link.enter().insert("path", "g")
+      .attr("class", "link")
+      .attr("d", function(d) {
+        var o = { x: source.x0, y: source.y0 };
+        return this.diagonal({ source: o, target: o });
+      }.bind(this));
+
+    // Transition links to their new position.
+    link.transition()
+      .duration(this.duration)
+      .attr("d", this.diagonal);
+
+    // Transition exiting nodes to the parent's new position.
+    link.exit().transition()
+      .duration(this.duration)
+      .attr("d", function(d) {
+        var o = { x: source.x, y: source.y };
+        return this.diagonal({ source: o, target: o });
+      }.bind(this))
+      .remove();
+
+    // Stash the old positions for transition.
+    nodes.forEach(function(d) {
+      d.x0 = d.x;
+      d.y0 = d.y;
+    });
+  }
+  drawLinkStart(d) {
+    this.drawGroup.selectAll("*").remove();
+    this.isDrawLink = true;
+    this.drawGroup
+      .append("line")
+      .attr("class", "link")
+      .attr("y1", d.x)
+      .attr("x1", d.y - 18)
+      .attr("y2", d.x)
+      .attr("x2", d.y - 18)
+  }
+  drawLinkEnd(d) {
+    this.drawGroup.selectAll("*").remove();
+    this.isDrawLink = false;
+    //后续要做的东西
+    console.log("等待孟玄的算法");
+  }
+}
+
+module.exports = PathDag;

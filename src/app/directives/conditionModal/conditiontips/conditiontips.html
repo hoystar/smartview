@@ -1,0 +1,14 @@
+<div id="condition-tooltips" class="cond-tip cond-tip-placement-rightTop" ng-style="{'top':info.y,'left':info.x}" ng-show="info.isShow">
+  <div class="cond-tip-content">
+    <div class="cond-tip-arrow">
+    </div>
+    <div class="cond-tip-inner">
+      <div>
+        <div class="cond-tip-title">实体:{{info.data.info.markedDomainName}}</div>
+        <div class="cond-tip-inner-content">标签:{{info.data.info.name}}<br/>
+         条件:{{info.data.info.condition.contrast}}{{conditiontips.conditionValue}}
+ </div>
+      </div>
+    </div>
+  </div>
+</div>

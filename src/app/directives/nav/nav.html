@@ -1,0 +1,34 @@
+<div class="sv-nav">
+    <div class="title">
+        <a ui-sref="welcome">SmartView</a>
+    </div>
+    <ul class="menu">
+        <li>
+            <a ui-sref="treePage.smartview.default">模型探索</a>
+        </li>
+        <li>
+            <a href="/page/smartview/subcirbeDataPage">数据沙盘</a>
+        </li>
+        <li>
+            <a href="/page/smartview/subcirbeDataPage">数据订阅</a>
+        </li>
+        <li>
+            <a href="/page/systemConfigPage">系统设置</a>
+        </li>
+        <li>
+            <a href="#">帮助中心</a>
+        </li>
+    </ul>
+    <div class="input-group">
+        <input type="text" class="form-control search-input" placeholder="输入搜索的关键字">
+        <span class="input-group-btn">
+      <button class="btn btn-default search-btn" type="button" ng-click="searchBar.search()">
+        <i class="iconfont">&#xe600;</i>
+      </button>
+    </span>
+    </div>
+    <div class="tool-group">
+        <i class="iconfont">&#xe622;</i>
+        <i class="iconfont">&#xe621;</i>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="dag-box">
+  <div class="tool-bar">
+    <div class="item">
+      <button type="button" title="创建视图" class="btn btn-default" ng-click="dag.createCanvas()">
+        <i class="iconfont">&#xe666;</i>
+      </button>
+    </div>
+    <div class="item">
+      <button type="button" title="保存视图" class="btn btn-default" ng-click="dag.saveCanvas()">
+        <i class="iconfont">&#xe63a;</i>
+      </button>
+    </div>
+    <div class="item">
+      <button type="button" title="我的视图" class="btn btn-default" ng-click="dag.canvasList()">
+        <i class="iconfont">&#xe639;</i>
+      </button>
+    </div>
+    <div class="item">
+      <button type="button" title="数据探索" class="btn btn-default conditionButton" ng-click="dag.controllCondition()">
+        <i class="iconfont">&#xe601;</i>
+      </button>
+    </div>
+    <div class="item-view-select" ng-if="canavsData.mainViewType===10">
+      <div><span>视图模式</span></div>
+      <div class="toggle" app-checkbox ng-model="canavsData.isViewNexus">
+        <label></label>
+      </div>
+      <div>
+        <label ng-if="canavsData.isViewNexus">关系</label>
+        <label ng-if="!canavsData.isViewNexus">流程</label>
+      </div>
+    </div>
+    <div class="item-right" ng-if="canavsData.mainViewType===10">
+      <button type="button" class="btn btn-default conditionButton" ng-click="dag.addFlowLine()" ng-if="!canavsData.isViewNexus">
+        <i class="iconfont">&#xe60d;</i>
+        <span>添加流程</span>
+      </button>
+    </div>
+  </div>
+  <div class="svg-container">
+    <div search-bar type="dag.SEARCHTYPE"></div>
+    <div multi-dropdown info="dag.mutipileDdInfo"></div>
+    <svg id="svg-canvas" class="dag-svg">
+      <defs>
+        <marker id="arrow" markerUnits="strokeWidth" markerWidth="12" markerHeight="10" viewBox="0 0 12 12" refX="6" refY="6" orient="auto">
+          <path d="M2,2 L10,6 L2,10 L6,6 L2,2" fill="#ccc"></path>
+        </marker>
+        <marker id="arrow-highlight" markerUnits="strokeWidth" markerWidth="12" markerHeight="10" viewBox="0 0 12 12" refX="6" refY="6" orient="auto">
+          <path d="M2,2 L10,6 L2,10 L6,6 L2,2" fill="#3daefe"></path>
+        </marker>
+      </defs>
+      <g class="zoom-container"></g>
+    </svg>
+    <div drag-layout type="dag.SEARCHTYPE"></div>
+  </div>
+  <content-menu info="dag._cxtMenuData" click="dag.clickCxtMenuItem" type="'dag'"></content-menu>
+  <div modal data="canavsData.data" close="dag.controllCondition" ng-if="dag.isShowModelExplore"></div>
+</div>

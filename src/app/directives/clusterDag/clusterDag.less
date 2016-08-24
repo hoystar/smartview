@@ -1,0 +1,79 @@
+.cluster-dag-container {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  rect {
+    fill: none;
+    pointer-events: all;
+  }
+  pre {
+    font-size: 18px;
+  }
+  line {
+    stroke: #000;
+    stroke-width: 1.5px;
+  }
+  .node circle {
+    cursor: pointer;
+    stroke-width: 1.5px;
+  }
+  .node text {
+    font-size: 11px;
+  }
+  path.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+  }
+  #fig-svg-canvas {
+    float: right;
+  }
+  .cluster-dag-list {
+    position: relative;
+    width: 300px;
+    height: 450px;
+    list-style: none;
+    border-right: 1px dashed #ddd;
+    overflow-y: auto;
+    .cluster-dag-title {
+      position: relative;
+      padding: 7px 0 7px 11px;
+      margin: 0;
+      border-bottom: 1px dashed #ddd;
+      cursor: pointer;
+      .iconfont {
+        position: absolute;
+        top: 7px;
+        right: 10px;
+        color: #23a1f0;
+        cursor: pointer;
+      }
+      &:hover {
+        background-color: #eee;
+      }
+    }
+    li {
+      padding: 10px 10px 10px 20px;
+      cursor: pointer;
+      .red-pot {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #c9e1fa;
+        border: 2px solid #539af0;
+      }
+      .text {
+        display: inline-block;
+        width: 240px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      &:hover {
+        background-color: #eee;
+      }
+    }
+  }
+}

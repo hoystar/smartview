@@ -1,0 +1,71 @@
+.sv-mainview-tab {
+  position: relative;
+  height: 30px;
+  background-color: #f5f5f5;
+  font-size:12px;
+  color:#666;
+  font-family: 'micro yahei';
+  border:none !important;
+  overflow: hidden;
+  &>li{
+    width:200px;
+    border-right:1px solid #ffffff;
+    a{
+      text-overflow: ellipsis;
+      white-space:nowrap;
+      overflow: hidden;
+      margin-right: 0 !important;
+      border:none !important;
+      padding:7px 15px !important;
+      border-radius: 0 !important;
+      color:inherit;
+      width:180px;
+      display: inline-block;
+      i{
+        padding-left: 10px;
+      }
+    }
+    .closeIcon{
+      width:18px;
+      display: inline-block;
+      float: right;
+      font-weight: bold;
+      color: inherit;
+    }
+  }
+  &>li.active{
+    background-color: #ffffff;
+  }
+}
+
+.close-tab {
+  z-index: 1;
+  cursor: pointer;
+  color: #CCC;
+  font-size: 12px !important;
+}
+.iconfont-color{
+  color: #036EBF;
+}
+.iconfont-size{
+  font-size:8px;
+}
+.box{width: 100%; margin: auto;line-height: 30px; height: 30px; position:relative;background-color: #f5f5f5;}
+.box .menu{width: 97%;float:left; height:30px; position:relative;}   
+.btn .badge {
+    position: relative;
+    padding:1px;
+    color: #000;
+    background-color: #fff; 
+}
+.btnNoBorder{
+  border:none;
+  font-size: 13px;
+}
+.dropdownWidth{
+  width:3%;
+}
+.dropRight{
+  left:-150px;
+  right:0px;
+}

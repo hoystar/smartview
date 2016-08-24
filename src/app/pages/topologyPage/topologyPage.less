@@ -1,0 +1,69 @@
+.topologyPage {
+  width: 100%;
+  height: calc(~"100% - 50px");
+  position: relative;
+  .info-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    padding: 10px 15px 0 15px;
+    background-color: rgba(255, 255, 255, 0.6);
+    .info-title {
+      font-size: 14px;
+      font-weight: normal;
+      padding-bottom: 5px;
+    }
+    .hint-row {
+      font-size: 10px;
+      font-weight: normal;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #dbdbdb;
+    }
+    .item-row {
+      position: relative;
+      font-size: 12px;
+      margin: 3px 0;
+      label {
+        color: #6a6a6a;
+        vertical-align: middle;
+      }
+      span {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .table-name {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+        line-height: 22px;
+      }
+      .toggle {
+        position: absolute;
+        top: -1px;
+        right: 0;
+      }
+      .circle-node {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        vertical-align: middle;
+      }
+      .iconfont {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        color: #999;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      &:hover .iconfont {
+        display: block;
+      }
+    }
+  }
+}

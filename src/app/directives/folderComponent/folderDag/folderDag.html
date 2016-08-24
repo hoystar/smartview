@@ -1,0 +1,114 @@
+<div class="folder-dag-box">
+  <div ng-class="{'folder-dag-box-left':data.folderId!=-1}">
+    <div class="cavas-title">
+      <div ng-if="data.folderId==-1">
+        <span><button type="button" class="btn btn-default save-btn" ng-click="folderDag.saveFolder()">保存</button></span>
+      </div>    
+    </div>  
+      
+    <div class="svg-container">
+      <div folder-list-bar data="data.folderBosList"></div>
+      <svg id="svg-canvas" class="folder-svg">
+        <!-- 预设置箭头 -->
+        <defs>
+          <marker id="arrow" markerUnits="strokeWidth" markerWidth="12" markerHeight="10" viewBox="0 0 12 12" refX="6" refY="6" orient="auto">
+            <path d="M2,2 L10,6 L2,10 L6,6 L2,2" fill="#999"></path>
+          </marker>
+          <marker id="arrow-highlight" markerUnits="strokeWidth" markerWidth="12" markerHeight="10" viewBox="0 0 12 12" refX="6" refY="6" orient="auto">
+            <path d="M2,2 L10,6 L2,10 L6,6 L2,2" fill="#576479"></path>
+          </marker>
+        </defs>
+        <g class="zoom-container"></g>
+      </svg>
+    </div>
+  </div>
+  <div class="folder-dag-box-right" ng-if="data.folderId!=-1">
+<!--       <div class="info-box" >
+        <div class="info-name-row">
+          <input type="text" class="form-control info-row-name" ng-model="data.folderInfo.name">
+          <span><button type="button" class="btn btn-default" ng-click="folderDag.saveFolder()">保存</button></span> 
+        </div>
+        <div class="info-row">
+            <div class="info-row-item">
+                <label for="">拥有者:</label>
+                <span>{{data.folderInfo.owner}}</span>
+            </div>
+            <div class="info-row-item">
+                <label for="">创建者:</label>
+                <span>{{data.folderInfo.createdBy}}</span>
+            </div>  
+            <div class="info-row-item">
+                <label for="">填充色:</label>
+                <span><div color-picker initcolor="data.folderInfo.color"></div></span>
+            </div>           
+        </div>
+        <div class="info-row">
+            <div class="info-row-item">
+                <label for="">父文件夹:</label>
+                <span>{{data.folderInfo.parentName}}</span>   
+            </div>   
+             <div class="info-row-item">
+                <label for="">创建时间:</label>
+                <span>{{data.folderInfo.createdOn}}</span>
+            </div>  
+            <div class="info-row-item">
+              <form id= "uploadForm">  
+                  <p ><input type="file" name="imageFile"/></p>  
+              </form>          
+            </div>            
+        </div>      
+        <div class="info-row">
+          <label for="">描述:</label>
+          <span><input type="text" class="form-control info-row-discription" ng-model="data.folderInfo.pageDescription"></span> 
+        </div>             
+    </div> -->
+    <div class="form-horizontal folder-info">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">名称：</label>
+                <div class="col-sm-9">
+                  <input type="text" ng-model="data.folderInfo.name" class="form-control" placeholder="请输入名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">拥有者：</label>
+                <div class="col-sm-9 control-text">{{data.folderInfo.owner}}</div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">创建者：</label>
+                <div class="col-sm-9 control-text">{{data.folderInfo.createdBy}}</div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">父文件夹：</label>
+                <div class="col-sm-9 control-text">{{data.folderInfo.parentName}}</div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">创建时间：</label>
+                <div class="col-sm-9 control-text">{{data.folderInfo.createdOn}}</div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">上传图片：</label>
+                <div class="col-sm-9 control-text"><form id= "uploadForm">  
+                  <p ><input type="file" name="imageFile"/></p>  
+              </form></div>  
+            </div>  
+            <div class="form-group">
+                <label class="col-sm-3 control-label">填充色：</label>
+                <div class="col-sm-9 control-text"><div color-picker initcolor="data.folderInfo.color"></div></div>
+            </div>  
+            <div class="form-group">
+                <label class="col-sm-3 control-label">描述：</label>
+                <div class="col-sm-9 control-text">
+                  <textarea ng-model="data.folderInfo.pageDescription" class="form-control" placeholder="请输入数据探索的描述" rows="5"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-9">
+                  <button type="button" ng-click="folderDag.saveFolder()" class="btn btn-primary">提交</button>
+                </div>
+            </div> 
+        </div>
+  </div>
+  
+  <content-menu info="folderDag._cxtMenuData" click="folderDag.clickCxtMenuItem"></content-menu>
+</div>
+

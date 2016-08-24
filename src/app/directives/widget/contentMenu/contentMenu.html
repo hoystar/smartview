@@ -1,0 +1,7 @@
+<div class="cxt-menu open" ng-style="{'top': info.y,'left': info.x}" ng-show="info.isShow">
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="item in info.data">
+            <a href="#" ng-click="click(item)">{{item.name}}</a>
+        </li>
+    </ul>
+</div>

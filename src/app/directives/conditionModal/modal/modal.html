@@ -1,0 +1,29 @@
+<div class="explore-container">
+  <div class="step-container row">
+
+    <div class="col-sm-2 step-desc" ng-class="{'active':modal.step===1}" uib-tooltip="可以增加或删除要参与探索的实体和关系。" tooltip-placement="bottom" tooltip-trigger="mouseenter">
+      <span class="step-index">1</span>开始探索
+    </div>
+    <div class="col-sm-2 step-desc" ng-class="{'active':modal.step===2}" uib-tooltip="输入和输出主要集中在标签的选取和条件设定。" tooltip-placement="bottom" tooltip-trigger="mouseenter">
+      <span class="step-index">2</span>输入输出
+    </div>
+    <div class="col-sm-2 step-desc" ng-class="{'active':modal.step===3}" uib-tooltip="可选取探索路径，增加关系节点表示该业务活动发生过。默认系统推荐路径。" tooltip-placement="bottom" tooltip-trigger="mouseenter">
+      <span class="step-index">3</span>路径范围
+    </div>
+    <div class="col-sm-2 step-desc" ng-class="{'active':modal.step===4}" uib-tooltip="保存定义的探索模板，也可以保存并直接执行探索。" tooltip-placement="bottom" tooltip-trigger="mouseenter">
+      <span class="step-index">4</span>保存探索
+    </div>
+    <div class="col-sm-4">
+      <button ng-show="modal.step !==1" class="step-btn step-btn-primary" ng-click="modal.previousStep()">&lt;&nbsp;上一步</button>
+      <button ng-show="modal.step !== 4" class="step-btn step-btn-primary" ng-click="modal.nextStep()">下一步&nbsp;&gt;</button>
+      <button ng-show="modal.step === 4" class="step-btn step-btn-primary" ng-click="modal.submit()">保存</button>
+      <button class="step-btn step-btn-default" ng-click="modal.exit()">退出探索</button>
+    </div>
+  </div>
+  <div class="details-container">
+    <div first-step class="step" ng-class="{'left-panel':modal.step !== 1}" step="modal.step" data="modal.dataModal"></div>
+    <div second-step class="step right-panel" ng-show="modal.step === 2" data="modal.dataModal"></div>
+    <div third-step class="step right-panel" step="modal.step" ng-show="modal.step === 3" data="modal.dataModal"></div>
+    <div fourth-step class="step right-panel" ng-show="modal.step === 4" data="modal.dataModal" step="modal.step"></div>
+  </div>
+</div>

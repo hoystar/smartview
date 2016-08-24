@@ -1,0 +1,67 @@
+.doc-tree {
+  height: 100%;
+  overflow-y: auto;
+  .treeHeight{
+    height:calc(~"100% - 10px");
+  }
+  .naza-tree-warp {
+    height: 100%;
+    border: none;
+    .naza-tree-inner {
+      box-shadow: none;
+      padding: 0;
+      .naza-tree-row {
+        width: 180px;
+        min-width: 180px;
+        &.active {
+          a {
+            background-color: #fff;
+            color: #555;
+          }
+        }
+        &.naza-tree-icon-folder-expanded .tree-icon {
+          background-image: url(../../../assets/imgs/folder-expanded.png);
+          background-repeat: no-repeat;
+          font-family: "iconfont";
+          margin-right: 5px;
+          margin-left: 7px;
+          &:before {
+            font-family: "iconfont";
+            content: "\e60e";
+            font-style: normal;
+            margin-left: -18px;
+            font-size: 14px;
+            vertical-align: middle;
+            color: #23a1f0;
+          }
+        }
+        &.naza-tree-icon-folder-closed .tree-icon {
+          background-image: url(../../../assets/imgs/folder-closed.png);
+          background-repeat: no-repeat;
+          font-family: "iconfont";
+          margin-right: 5px;
+          margin-left: 7px;
+          &:before {
+            font-family: "iconfont";
+            content: "\e60d";
+            font-style: normal;
+            margin-left: -18px;
+            font-size: 14px;
+            vertical-align: middle;
+            color: #23a1f0;
+          }
+        }
+        &.naza-tree-icon-canvas .tree-icon {
+          background-image: url(../../../assets/imgs/canvas.png);
+          background-repeat: no-repeat;
+          margin-right: 5px;
+          margin-left: 7px;
+        }
+        &.context {
+          border: none;
+          background-color: #eee;
+        }
+      }
+    }
+  }
+}

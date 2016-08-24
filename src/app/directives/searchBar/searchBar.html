@@ -1,0 +1,197 @@
+<div class="search-bar">
+  <div class="content-box" ng-if="!searchBar.isMinimize">
+    <i class="iconfont search-bar-icon drag-icon" title="拖动窗口">&#xe620;</i>
+    <i class="iconfont search-bar-icon mini-icon" title="最小化" ng-click="searchBar.minimize()">&#xe61f;</i>
+    <ul class="nav nav-tabs">
+      <li role="presentation" ng-repeat="item in searchBar.searchBar.navs" ng-class="{'active':searchBar.searchBar.currentTag===item.value}" ng-click="searchBar.changeNav(item.value,$event)">
+        <a href="#">{{item.text}}</a>
+      </li>
+    </ul>
+    <!-- 以后结果要封装为多个directive -->
+    <!-- 非表搜索框 -->
+    <div class="col-lg-6 search-input-box" ng-if="searchBar.searchBar.currentTag!=='Table'">
+      <div class="input-group">
+        <input type="text" class="form-control search-input" placeholder="输入关键字搜索，如电" ng-model="searchBar.searchBar.keyword" ng-keydown="searchBar.keySearch($event)">
+        <span class="input-group-btn">
+              <button class="btn btn-default search-btn" type="button" ng-click="searchBar.search()">
+                <i class="iconfont">&#xe600;</i>
+              </button>
+            </span>
+      </div>
+    </div>
+    <!-- 表搜索框 -->
+    <div class="search-table-input-box" ng-if="searchBar.searchBar.currentTag==='Table'">
+      <div class="data-source-box">
+        <label for="">数据源:</label>
+        <select class="form-control data-source-select" ng-model="searchBar.searchBar.tableInfo.currentType" ng-options="item for item in searchBar.searchBar.tableInfo.types">
+        </select>
+        <ui-select ng-model="searchBar.searchBar.tableInfo.currentProject.name" theme="select2" ng-disabled="disabled" title="请选择项目" append-to-body="true" class="search-bar-ui-select2">
+          <ui-select-match placeholder="请选择项目">{{$select.selected.name}}</ui-select-match>
+          <ui-select-choices repeat="item in searchBar.searchBar.tableInfo.projects" refresh="searchBar.fetchProject($select.search)" refresh-delay="500">
+            <div>
+              <p class="name-row">
+                <label for="">名字:</label>
+                <span>{{item.showName}}</span>
+              </p>
+              <p class="db-row">
+                <label for="">DB:</label>
+                <span>{{item.name}}</span>
+              </p>
+            </div>
+          </ui-select-choices>
+        </ui-select>
+        <div class="input-group keyword-input-group">
+          <input type="text" class="form-control search-input" placeholder="输入关键字搜索，如电" ng-model="searchBar.searchBar.keyword" ng-keydown="searchBar.keySearch($event)">
+          <span class="input-group-btn">
+                  <button class="btn btn-default search-btn" type="button" ng-click="searchBar.search()">
+                    <i class="iconfont">&#xe600;</i>
+                  </button>
+                </span>
+        </div>
+      </div>
+    </div>
+    <!-- 以后结果要封装为多个directive -->
+    <!-- 实体结果 -->
+    <div class="result-box" ng-if="searchBar.searchBar.currentTag==='ListEntities'">
+      <div class="result-item" ng-repeat="item in searchBar.searchBar.result">
+        <p class="result-item-row">
+          <a href="/page/smartview/entityPage?code={{item.id}}" target="_blank">{{item.name}}</a>
+          <button class="drag-btn blue" ng-class="{'seleted':item.isSelected}" ng-mousedown="searchBar.dragStart($event,item)" ng-mouseup="searchBar.dragEnd(item)">拖动添加</button>
+        </p>
+        <p class="result-item-row">
+          <label for="">描述:</label>
+          <span class="text des">{{item.description}}</span>
+        </p>
+        <p class="result-item-row">
+          <span class="field field-2">
+                        <label for="">业务分类:</label>
+                        <span class="text">-</span>
+          </span>
+          <span class="field field-2">
+                        <label for="">一度关系:</label>
+                        <span class="text">-</span>
+          </span>
+        </p>
+        <p class="result-item-row">
+          <span class="field field-2">
+                        <label for="">覆盖表数:</label>
+                        <span class="text">-</span>
+          </span>
+          <span class="field field-2">
+                        <label for="">负责人:</label>
+                        <span class="text">-</span>
+          </span>
+        </p>
+      </div>
+    </div>
+    <!-- 关系结果 -->
+    <div class="result-box" ng-if="searchBar.searchBar.currentTag==='ListLinks'">
+      <div class="result-item" ng-repeat="item in searchBar.searchBar.result">
+        <p class="result-item-row">
+          <a href="/page/smartview/relationPage?code={{item.id}}" target="_blank">{{item.name}}</a>
+          <button class="drag-btn green" ng-class="{'seleted':item.isSelected}" ng-mousedown="searchBar.dragStart($event,item)" ng-mouseup="searchBar.dragEnd(item)">拖动添加</button>
+        </p>
+        <p class="result-item-row">
+          <label for="">描述:</label>
+          <span class="text des">{{item.description}}</span>
+        </p>
+        <p class="result-item-row">
+          <span class="field field-2">
+                        <label for="">业务分类:</label>
+                        <span class="text">-</span>
+          </span>
+          <span class="field field-2">
+                        <label for="">一度关系:</label>
+                        <span class="text">-</span>
+          </span>
+        </p>
+        <p class="result-item-row">
+          <span class="field field-2">
+                        <label for="">覆盖表数:</label>
+                        <span class="text">-</span>
+          </span>
+          <span class="field field-2">
+                        <label for="">负责人:</label>
+                        <span class="text">-</span>
+          </span>
+        </p>
+      </div>
+    </div>
+    <!-- 标签结果 -->
+    <div class="result-box mark-result-box" ng-if="searchBar.searchBar.currentTag==='SearchMarkedTagDomains'">
+      <div class="result-item" ng-repeat="item in searchBar.searchBar.result">
+        <p class="result-item-row">
+          <a href="/page/smartview/tagsPage?tagCode={{item.tagCode}}&entityCode=''" target="_blank">{{item.tagName}}</a>
+        </p>
+        <p class="result-item-row">
+          <label for="">描述:</label>
+          <span class="text des">{{item.description}}</span>
+        </p>
+        <div class="info-box">
+          <p class="result-item-row">
+            <span class="field field-2">
+                            <label for="">所属实体/关系:</label>
+                            <span class="text">-</span>
+            </span>
+            <span class="field field-2">
+                            <label for="">业务分类:</label>
+                            <span class="text">-</span>
+            </span>
+          </p>
+          <p class="result-item-row">
+            <span class="field field-2">
+                            <label for="">取值类型/数据类型:</label>
+                            <span class="text">-</span>
+            </span>
+            <span class="field field-2">
+                            <label for="">负责人:</label>
+                            <span class="text">-</span>
+            </span>
+          </p>
+        </div>
+        <div class="entity-box">
+          <button class="drag-btn blue" ng-repeat="entity in item.domains" ng-class="{'seleted':entity.isSelected}" ng-if="entity.domainType===1" ng-mousedown="searchBar.dragStart($event,entity)" ng-mouseup="searchBar.dragEnd(entity)">{{entity.name}}</button>
+        </div>
+        <div class="link-box">
+          <button class="drag-btn green" ng-repeat="link in item.domains" ng-class="{'seleted':link.isSelected}" ng-if="link.domainType===2" ng-mousedown="searchBar.dragStart($event,link)" ng-mouseup="searchBar.dragEnd(link)">{{link.name}}</button>
+        </div>
+      </div>
+    </div>
+    <!-- 表格搜索结果 -->
+    <div class="result-box" ng-if="searchBar.searchBar.currentTag==='Table'">
+      <div class="result-item" ng-repeat="item in searchBar.searchBar.result">
+        <p class="result-item-row">
+          <a href="/page/smartview/tablePage?code={{item.id}}&dsId={{item.dsId}}" target="_blank">{{item.name}}</a>
+          <button class="drag-btn purple" ng-class="{'seleted':item.isSelected}" ng-mousedown="searchBar.dragStart($event,item)" ng-mouseup="searchBar.dragEnd(item)">拖动添加</button>
+        </p>
+        <p class="result-item-row">
+          <label for="">描述:</label>
+          <span class="text des">{{item.description}}</span>
+        </p>
+        <p class="result-item-row">
+          <span class="field field-2">
+                        <label for="">所属实体/关系:</label>
+                        <span class="text">-</span>
+          </span>
+          <span class="field field-2">
+                        <label for="">所属应用:</label>
+                        <span class="text">-</span>
+          </span>
+        </p>
+        <p class="result-item-row">
+          <span class="field field-2">
+                        <label for="">存储量:</label>
+                        <span class="text">{{item.dataLength}}</span>
+          </span>
+          <span class="field field-2">
+                        <label for="">产出任务:</label>
+                        <span class="text">-</span>
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="minimize-content-box" ng-if="searchBar.isMinimize">
+    <i class="iconfont">&#xe600;</i>
+  </div>
+</div>

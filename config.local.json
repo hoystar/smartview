@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0",
+  "name": "webpack-angular",
+  "server": {
+    "host": "http://smartv.dev.aliyun.test:8080"
+  },
+  "testserver": {
+    "host": "http://local.biz.alibaba-inc.com:9999"
+  },
+  "vendors": {
+    "angular": "angular",
+    "jquery": "jquery",
+    "d3": "d3",
+    "three.js": "three.js"
+  },
+  "provide": {
+    "jQuery": "jquery",
+    "$": "jquery",
+    "d3": "d3",
+    "THREE": "three.js",
+    "moment": "moment"
+  },
+  "expose": {
+    "jQuery": "jquery.js",
+    "$": "jquery.js",
+    "THREE": "three.js"
+  },
+  "proxy": {
+    "host": "http://100.69.215.105",
+    "routes": [
+      "/rest*",
+      "/web*",
+      "/uweb*",
+      "/ide*",
+      "/admin*",
+      "/jsonp*",
+      "/header*",
+      "/csrf-assemble.js*"
+    ]
+  },
+  "locals": {
+    "available": ["en-US", "zh-CN"],
+    "default": "zh-CN",
+    "form": "properties",
+    "to": "json"
+  }
+}

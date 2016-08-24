@@ -1,0 +1,91 @@
+<div class="app-modal entity-recommend-modal">
+  <div class="modal-header app-modal-header">
+    <h5>标题</h5>
+  </div>
+  <div class="app-modal-container">
+    <div ng-if="modal.node.config.type===1&&modal.step===1">
+      <p class="title-text" ng-if="modal.node.config.content[0].recType===1">根据智能发现算法，建议该表关联到</p>
+      <p class="title-text" ng-if="modal.node.config.content[0].recType===2">根据智能发现算法，该表没有匹配到现有的实体，建议新建实体</p>
+      <div class="form-group">
+        <label for="">实体中文名</label>
+        <input type="text" class="form-control" placeholder="请输入实体中文名" ng-model="modal.node.config.content[0].name">
+      </div>
+      <div class="form-group">
+        <label for="">实体英文名</label>
+        <input type="text" class="form-control" placeholder="请输入实体英文名" ng-model="modal.node.config.content[0].code" ng-disabled="modal.node.config.content[0].recType===1">
+      </div>
+      <div class="form-group">
+        <label for="">实体描述</label>
+        <input type="text" class="form-control" placeholder="请输入实体描述" ng-model="modal.node.config.content[0].description">
+      </div>
+    </div>
+    <div ng-if="modal.node.config.type===2&&modal.step===1">
+      <p class="title-text" ng-if="modal.node.config.content[0].recType===1">根据智能发现算法，建议该表关联到</p>
+      <p class="title-text" ng-if="modal.node.config.content[0].recType===2">根据智能发现算法，该表没有匹配到现有的关系，建议新建关系</p>
+      <div class="form-group">
+        <label for="">关系中文名</label>
+        <input type="text" class="form-control" placeholder="请输入实体中文名" ng-model="modal.node.config.content[0].name">
+      </div>
+      <div class="form-group">
+        <label for="">关系英文名</label>
+        <input type="text" class="form-control" placeholder="请输入实体英文名" ng-model="modal.node.config.content[0].code" ng-disabled="modal.node.config.content[0].recType===1">
+      </div>
+      <div class="form-group">
+        <label for="">关系描述</label>
+        <input type="text" class="form-control" placeholder="请输入实体描述" ng-model="modal.node.config.content[0].description">
+      </div>
+      <div class="form-group">
+        <label for="">该关系关联实体</label>
+        <p>
+          <span class="rect" ng-repeat="item in modal.neighborNodes">
+                        {{item.config.content[0].name}}
+                    </span>
+        </p>
+      </div>
+    </div>
+    <div ng-if="modal.step===2" class="step-2-box">
+      <h4>关联表信息</h4>
+      <div class="base-info-box">
+        <div class="info-row">
+          <label for="">名字：</label>
+          <span>{{modal.node.config.content[0].associatedTables[0].dsId}}</span>
+        </div>
+        <div class="info-row">
+          <label for="">描述：</label>
+          <span>{{modal.node.config.content[0].associatedTables[0].dsInfo}}</span>
+        </div>
+        <p>
+          <label for="">关联表</label>
+        </p>
+        <div class="node-contain">
+          <div class="item" ng-repeat="item in modal.node.config.content[0].associatedTables">{{item.name}}</div>
+        </div>
+      </div>
+      <h4>云关联</h4>
+      <div class="cloud-info-box">
+        <p>
+          <input type="checkbox">
+          <span>全选</span>
+        </p>
+        <div ng-repeat="(key, value) in modal.config" class="cloud-info-box-content">
+          <p>
+            <input type="checkbox">
+            <span>{{key}}</span>
+          </p>
+          <div class="table-box">
+            <div class="table-row" ng-repeat="table in value">
+              <input type="checkbox" ng-model="table.isSelected">
+              <span>{{table.name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer app-modal-footer">
+    <button class="btn btn-primary" type="button" ng-if="modal.step===2" ng-click="modal.preview()">上一步</button>
+    <button class="btn btn-primary" type="button" ng-if="modal.step===1" ng-click="modal.next()">下一步</button>
+    <button class="btn btn-primary" type="button" ng-if="modal.step===2" ng-click="modal.submit()">确定</button>
+    <button class="btn btn-warning" type="button" ng-click="modal.cancel()">取消</button>
+  </div>
+</div>

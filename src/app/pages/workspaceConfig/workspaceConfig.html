@@ -1,0 +1,32 @@
+<div>
+    <h3>工作空间属性设置</h3>
+    <div class="btn-bar">
+        <button class="btn btn-primary" ng-show="workspaceConfig.hasEdit" ng-click="workspaceConfig.updateWorkspaceInfo()">保存</button>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>名称</th>
+                <th>描述</th>
+                <th>值</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in workspaceConfig.workspaceInfo">
+                <td>{{item.label}}</td>
+                <td>{{item.description}}</td>
+                <td><span ng-if="!item.isEdit">{{item.value}}</span>
+                    <input ng-if="item.isEdit&&!item.isEnums" ng-model="item.value" type="text"/>
+                    <select class="form-control" ng-if="item.isEdit&&item.isEnums" ng-model="item.value" ng-options=" values for values in item.options">
+                    </select>
+                </td>
+                <td>
+                    <a href="#" ng-show="!item.isEdit" ng-click="workspaceConfig.startEdit(item)"><span >编辑</span></a>
+                    <a href="#" ng-show="item.isEdit" ng-click="workspaceConfig.finishEdit(item)"><span >确定</span></a>
+                    <a href="#" ng-show="item.isEdit" ng-click="workspaceConfig.cancleEdit(item)"><span >取消编辑</span></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

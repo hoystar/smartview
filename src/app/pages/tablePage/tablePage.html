@@ -1,0 +1,142 @@
+<header-bar></header-bar>
+<div class="tablePage">
+    <div bread-crumbs></div>
+    <div class="container">
+        <div class="base-info-box">
+            <h4>基本信息</h4>
+            <div class="row">
+                <div class="row-item">
+                    <label for="">表名</label>
+                    <span>{{page.detail.name}}</span>
+                </div>
+                <div class="row-item">
+                    <label for="">表类型</label>
+                    <span>{{page.detail.type}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row-item">
+                    <label for="">负责人</label>
+                    <span>{{page.detail.owner}}</span>
+                </div>
+                <div class="row-item">
+                    <label for="">创建时间</label>
+                    <span>{{page.detail.createdOn}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row-item">
+                    <label for="">所在的库</label>
+                    <span>{{page.detail.dsName}}</span>
+                </div>
+                <div class="row-item">
+                    <label for="">所在库的类型</label>
+                    <span>{{page.detail.dsType}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row-item">
+                    <label for="">是否为分区表</label>
+                    <span>{{page.detail.partitionedTable}}</span>
+                </div>
+                <div class="row-item">
+                    <label for="">纪录数</label>
+                    <span>{{page.detail.rows}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row-item">
+                    <label for="">表生命周期</label>
+                    <span>{{page.detail.lifeCycle}}</span>
+                </div>
+                <div class="row-item">
+                    <label for="">表存储占用</label>
+                    <span>{{page.detail.dataLenght}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row-item">
+                    <label for="">描述</label>
+                    <span>{{page.detail.comment}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="detail-box">
+            <ul class="nav nav-tabs nav-justified">
+                <li ng-repeat="item in page.navs" ng-class="{'active':item.value===page.currentTag}" ng-click="page.changeTag(item)">
+                    <a href="#">{{item.text}}</a>
+                </li>
+            </ul>
+            <div class="detail-container" ng-if="page.currentTag==='FieldDetail'">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>名字</th>
+                            <th>类型</th>
+                            <th>是否为空</th>
+                            <th>是否为分区</th>
+                            <th>描述</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in page.detail.columns">
+                            <td>{{item.name}}</td>
+                            <td>{{item.dataType}}</td>
+                            <td>{{item.nullable}}</td>
+                            <td>{{item.partitioned}}</td>
+                            <td>{{item.comment}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="detail-container" ng-if="page.currentTag==='PartitionDetail'">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>名字</th>
+                            <th>存储量</th>
+                            <th>列数</th>
+                            <th>创建时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in page.detail.partitions">
+                            <td>{{item.name}}</td>
+                            <td>{{item.dataLenght}}</td>
+                            <td>{{item.rows}}</td>
+                            <td>{{item.createdOn}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="detail-container" ng-if="page.currentTag==='clusterDag'">
+                <div double-directive-dag table-info="page.clusterData"></div>
+            </div>
+            <div class="detail-container" ng-if="page.currentTag==='constraintDetail'">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>键名</th>
+                            <th>字段名</th>
+                            <th>字段类型</th>
+                            <th>关联表名</th>
+                            <th>关联字段名</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in page.detail.keyColumns">
+                            <td>{{item.key}}</td>
+                            <td>{{item.name}}</td>
+                            <td>
+                                <span ng-if="item.type===3">外键</span>
+                                <span ng-if="item.type===2">主键</span>
+                            </td>
+                            <td>{{item.relTableName}}</td>
+                            <td>{{item.relColumnName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

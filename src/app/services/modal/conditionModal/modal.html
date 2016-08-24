@@ -1,0 +1,95 @@
+<div class="app-modal">
+  <div class="app-modal-container">
+    <div class="container">
+      <div class="panel">
+        <div class="panel-info">
+          <h3 class="panel-title">{{modal.tagCode}}<span>({{modal.tagEntity}})</span></h3> 
+        </div>
+      </div>
+      <form class="form-horizontal">
+        <div class="form-group">
+          <span class="col-sm-2 control-label">操作符:</span>
+          <div class="col-sm-9">
+            <select class="form-control" ng-model="modal.ConditionObj" ng-change="modal.changeInputType(modal.ConditionObj.id)" ng-options="item.name for item in modal.currentConditionArray">
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <span class="col-sm-2 control-label">值:</span>
+          <div class="col-sm-9" ng-if="modal.isEnum">
+            <div ng-if=" modal.inputType === modal.inputConstant.ONE ">
+              <select onchange="" class="form-control" ng-model="modal.enumDataSelected">
+                <option ng-repeat="item in modal.enumData" value="{{item}}">{{item}}</option>
+              </select>
+            </div>
+            <div ng-if=" modal.inputType === modal.inputConstant.MULTI">
+              <ui-select multiple ng-model="modal.enumDataSelected" theme="select2" class="form-control">
+                <ui-select-match placeholder="选择枚举值">{{$item}}</ui-select-match>
+                <ui-select-choices repeat="item in (modal.enumData | filter: $select.search)">
+                  <span ng-bind="item"></span>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+            <div ng-if="modal.inputType === modal.inputConstant.NULL">
+              <input class="form-control" type="text" ng-model="modal.ConditionObj.value" disabled="true" placeholder="请输入值" readonly="true" />
+            </div>
+          </div>
+          <div class="col-sm-9 value-group" ng-if="!modal.isEnum">
+            <div ng-if="modal.inputType === modal.inputConstant.NULL ">
+              <input class="form-control" type="text" ng-model="modal.ConditionObj.value" disabled="true" placeholder="请输入值" readonly="true" />
+            </div>
+            <div ng-if=" modal.inputType === modal.inputConstant.ONE ">
+              <div ng-if="modal.tagType === modal.tagTypeConstant.BOOLEAN ">
+                <select ng-model="modal.boolSelected">
+                  <option value="true">true</option>
+                  <option value="false">false</option>
+                </select>
+              </div>
+              <div ng-if="modal.tagType === modal.tagTypeConstant.DATE">
+                <div date-time-picker show-time="false" ng-model="modal.dateTime1"></div>
+              </div>
+              <div ng-if="modal.tagType === modal.tagTypeConstant.DATETIME">
+                <div date-time-picker show-time="true" ng-model="modal.dateTime1"></div>
+              </div>
+              <div ng-if="!(modal.tagType === modal.tagTypeConstant.BOOLEAN)
+                        && !(modal.tagType === modal.tagTypeConstant.DATE )
+                        && !(modal.tagType === modal.tagTypeConstant.DATETIME )">
+                <input class="form-control" type="text" ng-model="modal.resultData.oneValue"  placeholder="请输入值" />
+              </div>
+            </div>
+            <div ng-if=" modal.inputType === modal.inputConstant.BETWEEN ">
+              <div ng-if="modal.tagType === modal.tagTypeConstant.DATE ">
+                <div date-time-picker show-time="false" ng-model="modal.dateTime1"></div>
+                <div date-time-picker show-time="false" ng-model="modal.dateTime2"></div>
+              </div>
+              <div ng-if="modal.tagType === modal.tagTypeConstant.DATETIME ">
+                <div date-time-picker show-time="true" ng-model="modal.dateTime1"></div>
+                <div date-time-picker show-time="true" ng-model="modal.dateTime2"></div>
+              </div>
+              <div ng-if=" !(modal.tagType === modal.tagTypeConstant.DATE )
+                            && !(modal.tagType === modal.tagTypeConstant.DATETIME ) ">
+                在
+                <input class="form-control" type="text" ng-model="modal.resultData.betweenValue[0]" placeholder="请输入开始值" /> 和
+                <input class="form-control" type="text" ng-model="modal.resultData.betweenValue[1]" placeholder="请输入结束值" /> 之间
+              </div>
+            </div>
+            <div ng-if=" modal.inputType === modal.inputConstant.MULTI">
+              <div>
+                <span class="control-label ">添加:</span>
+                <span class="glyphicon glyphicon-plus value-plusIcon" ng-click="modal.addItemPlusArray()"></span>
+              </div>
+              <div ng-repeat="item in modal.plusArray">
+                <input type="text" ng-model="item.value" class="value-plusIcon-input" />
+                <span class="glyphicon glyphicon-minus value-plusIcon" ng-click="modal.removeItemPlusArray(item.id)"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="modal-footer app-modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="modal.submit()">确定</button>
+    <button class="btn btn-warning" type="button" ng-click="modal.cancel()">取消</button>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<header-bar></header-bar>
+<div class="tree-page">
+  <div class="left-box">
+    <div class="select-area">
+      <select class="form-control left-box-nav" ng-options="item as item.key for item in page.menus" ng-model="page.currentTag">
+      </select>
+    </div>
+    <div class="tree-area">
+      <doc-tree ng-show="page.currentTag.value==='docTree'"></doc-tree>
+      <canvas-tree ng-show="page.currentTag.value==='canvasTree'"></canvas-tree>
+      <explore-tree ng-show="page.currentTag.value==='dataExplore'"></explore-tree>
+    </div>
+  </div>
+  <div class="right-box" id="right-box">
+    <div ui-view class="tree-page-container"></div>
+  </div>
+</div>

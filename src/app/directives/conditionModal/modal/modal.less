@@ -1,0 +1,127 @@
+.explore-container {
+  top: -30px;
+  left: -180px;
+  z-index: 101;
+  position: absolute;
+  width: calc(~"100% + 180px");
+  height: calc(~"100% + 35px");
+  background-color: #fff;
+  border: 1px solid #ccc;
+  .list-container {
+    ul {
+      max-height: 100px;
+      overflow: scroll;
+      li {
+        float: left;
+        text-align: center;
+        padding: 3px 20px;
+        font-size: 12px;
+        font-family: "micro yahei";
+        list-style: none;
+        margin-right: 10px;
+        margin-bottom: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+  .tag-color {
+    background-color: #4f7cd4;
+    color: #fff;
+  }
+  .entity-color {
+    background-color: #3daefe;
+    color: #fff;
+    border: 1px solid #3daefe;
+    &.unactive {
+      background-color: #fff;
+      color: #000;
+    }
+  }
+  .relation-color {
+    background-color: #12dec6;
+    color: #fff;
+    border: 1px solid #12dec6;
+    &.unactive {
+      background-color: #fff;
+      color: #000;
+    }
+  }
+  .step-container {
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    color: #999;
+    &>div {}
+    &>div:last-child {
+      text-align: right;
+    }
+    .btn-row {
+      padding-right: 0;
+    }
+    .step-btn {
+      font-size: 12px;
+      padding: 6px 10px;
+      margin: 5px 0 5px 5px;
+      border: none;
+    }
+    .step-btn-default {
+      background-color: #f5f5f5;
+      color: #000;
+      width: 85px;
+      text-align: center;
+    }
+    .step-btn-primary {
+      background-color: #2c89c9;
+      color: #fff;
+      width: 85px;
+      text-align: center;
+    }
+    .step-desc {
+      text-align: center;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      &.active {
+        border-bottom: 1px solid #2c89c9;
+        color: #2c89c9;
+        margin-bottom: -1px;
+        .step-index {
+          border: 1px solid #2c89c9;
+        }
+      }
+      .step-index {
+        display: inline-block;
+        border-radius: 9px;
+        font-size: 12px;
+        border: 1px solid #999;
+        width: 16px;
+        line-height: 16px;
+        height: 16px;
+      }
+    }
+  }
+}
+
+.details-container {
+  height: 100%;
+}
+
+.app-button-group {
+  position: absolute;
+  width: 280px;
+  right: 15px;
+  bottom: 10px;
+}
+
+.step {
+  height: 100%;
+  &.left-panel {
+    width: calc(~"100% - 411px");
+    float: left;
+  }
+  &.right-panel {
+    width: 411px;
+    float: right;
+    background-color: #f0f0f0;
+    overflow-y: auto;
+    min-height: 100%;
+  }
+}

@@ -1,0 +1,40 @@
+<div class="cluster-tooltips" ng-show="info.isShow" ng-style="{'top':info.y,'left':info.x}">
+    <i class="iconfont close-btn" ng-click="tips.closeTips()">&#xe623;</i>
+    <div class="tooltips-box">
+        <div class="title">
+            <span>{{info.data.tableName}}</span>
+            <a class="detail-link" href="/page/smartview/tablePage?code={{tips.detail.guid}}&dsId={{tips.detail.dsId}}" target="_blank">详情</a>
+        </div>
+        <div class="row">
+            <div class="col-md-6">BU：－</div>
+            <div class="col-md-6">负责人： {{tips.detail.owner}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">上游表层数： {{tips.detail.ancestorTableLevel}}</div>
+            <div class="col-md-6">下游表层数：{{tips.detail.descendantTableLevel}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">上游表数量：{{tips.detail.ancestorTableCount}}</div>
+            <div class="col-md-6">下游表数量：{{tips.detail.descendantTableCount}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">直接上游表数量：{{tips.detail.paternalTableCount}}</div>
+            <div class="col-md-6">直接下游表数量：{{tips.detail.childrenTableCount}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">表生命周期：{{tips.detail.lifeCycle}}</div>
+            <div class="col-md-6">表存储占用：{{tips.detail.dataLenght}}</div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-md-3">
+                <a href="/clusterDetailPage">表明细</a>
+            </div>
+            <div class="col-md-3">
+                <a href="/clusterDetailPage?type=ClusterDetail">血缘明细</a>
+            </div>
+            <div class="col-md-3">
+                <a href="/clusterDetailPage">最新代码</a>
+            </div>
+        </div> -->
+    </div>
+</div>

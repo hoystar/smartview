@@ -1,0 +1,74 @@
+<div class="app-modal">
+    <loading ng-show="modal.isLoading"></loading>
+    <div class="modal-header app-modal-header">
+        <h5>创建实例</h5>
+    </div>
+    <div class="app-modal-container">
+        <div class="app-modal-name">
+            <label class="label-name">请输入实例名称：</label>
+            <input class="form-control" type="text" ng-model="modal.execName" value="{{modal.execName}}" />
+        </div>
+        <div class="app-modal-desc">
+            <label class="label-desc">请输入实例描述：</label>
+            <input class="form-control" type="text" ng-model="modal.execDesc"/>
+        </div>
+    </div>
+    <div class="base-info-box">
+        <div class="tab-page">
+            <ul class="nav nav-tabs" ng-init="vm.activeTab=1">
+                <li ng-class="{active: vm.activeTab == 1}"><a href="javascript:;" ng-click="vm.activeTab = 1">输入</a></li>
+                <li ng-class="{active: vm.activeTab == 2}"><a href="javascript:;" ng-click="vm.activeTab = 2">输出</a></li>
+                <li ng-class="{active: vm.activeTab == 3}"><a href="javascript:;" ng-click="vm.activeTab = 3">分区</a></li>
+            </ul>
+            <div class="tab-content tab-bordered">
+                <div class="tab-panel" ng-show="vm.activeTab == 1">
+                    <create-instance-tree-dag data="modal.defineInfo.conditions" dag-id="modal.dagId"></create-instance-tree-dag>
+                </div>
+                <div class="tab-panel" ng-show="vm.activeTab == 2">
+                    <table class="table">
+                        <caption>输出标签</caption>
+                        <tr>
+                            <th>序号</th>
+                            <th>节点编码</th>
+                            <th>类型</th>
+                            <th>标签编码</th>
+                        </tr>
+                        <tr ng-repeat="item in modal.defineInfo.outputItems">
+                            <td class="tag-tabled-item tag-index">{{$index + 1}}</td>
+                            <td class="tag-tabled-item tag-domainCode">{{item.domainCode}}</td>
+                            <td ng-if="item.domainType===1" class="tag-tabled-item tag-type">实体</td>
+                            <td ng-if="item.domainType===2" class="tag-tabled-item tag-type">关系</td>
+                            <td class="tag-tabled-item tag-code">{{item.tagCode}}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="tab-panel" ng-show="vm.activeTab==3">
+                    <table class="table">
+                        <caption>分区信息</caption>
+                        <tr>
+                            <th>实体</th>
+                            <th>表名</th>
+                            <th>分区名</th>
+                            <th>运算符</th>
+                            <th>分区值</th>
+                        </tr>
+                        <tr ng-repeat="item in modal.defineInfo.partitions">
+                            <td>{{item.leftValue.value.code}}</td>
+                            <td>{{item.leftValue.value.tableName}}</td>
+                            <td>{{item.leftValue.value.partitionName}}</td>
+                            <td>{{item.contrast}}</td>
+                            <td>
+                                <input type="text" ng-model="item.rightValue.value">
+                                </input>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer app-modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="modal.submit()">确定</button>
+        <button class="btn btn-warning" type="button" ng-click="modal.cancel()">取消</button>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="app-modal">
+    <div class="app-modal-container">
+        <div class="mixture-box">
+            <div ng-repeat=" partition in modal.mixtureArray">
+                <p class="form-row">
+                    <label class="title">{{partition.condition.name}}({{partition.condition.type}})({{partition.condition.tableName}}):</label>
+                    <select class="form-control" ng-change="modal.changeInputType(partition)" ng-model="partition.condition.symbol" ng-options="item.value as item.name for item in modal.exploreRange.conditionArray">
+                    </select>
+                    <span class="glyphicon glyphicon-plus partition-icon" ng-if="partition.condition.multiValue" ng-click="modal.exploreRange.addInputBox(partition)"></span>
+                    <div ng-repeat="item in partition.value">
+                        <div date-time-picker ng-if="item.type==='DATE'" show-time="partition.condition.type==='DATETIME'" ng-model="item.value"></div>
+                        <div ng-if="item.type==='INPUT'">
+                        <input type="text" class="form-control" ng-model="item.value" />
+                        </div>
+                        <span class="glyphicon glyphicon-minus partition-icon" ng-if="partition.condition.multiValue" ng-click="modal.exploreRange.removeInputBox(partition,item)"></span>
+                    </div>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer app-modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="modal.submit()">关闭</button>
+    </div>
+</div>

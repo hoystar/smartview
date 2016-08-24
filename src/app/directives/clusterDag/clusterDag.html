@@ -1,0 +1,20 @@
+<div class="cluster-dag-container">
+  <svg id="fig-svg-canvas" width="1051" height="800">
+  </svg>
+  <div class="cluster-dag-list">
+    <div class="cluster-dag-list-item" ng-repeat="list in clusterDag.tableList">
+      <p class="cluster-dag-title" ng-click="clusterDag.updateTable(list,$event)">
+        <span>{{list.tableName}}</span>
+        <i class="iconfont icon-show" ng-if="!list.isShow" ng-click="clusterDag.showList(list,$event)">&#xe60d;</i>
+        <i class="iconfont icon-hide" ng-if="list.isShow" ng-click="clusterDag.showList(list,$event)">&#xe60e;</i>
+      </p>
+      <ul ng-if="list.isShow">
+        <li ng-repeat="item in list.data" ng-click="clusterDag.updateField(item,$event)">
+          <span class="red-pot"></span>
+          <span class="text">{{item.fieldName}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div cluster-tool-tips info="clusterDag.tipsInfo"></div>
+</div>

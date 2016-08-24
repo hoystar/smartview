@@ -1,0 +1,9 @@
+<div class="road-map-container">
+  <div ng-repeat="item in roadMap.data">
+    <div class="circle" ng-class="{'active':($index+1)===step}">
+      <p class="step">{{item.step}}</p>
+      <p class="name">{{item.name}}</p>
+    </div>
+    <div class="line" ng-class="{'last-item': $last}"></div>
+  </div>
+</div>

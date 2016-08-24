@@ -1,0 +1,29 @@
+<div class="app-modal add-data-source-modal">
+    <div class="modal-header app-modal-header">
+        <h5>添加云计算资源</h5>
+    </div>
+    <div class="app-modal-container">
+        <div class="modal-row" ng-repeat="item in modal.editDSController.baseProperty">
+            <label>
+                <span class="red-pot" ng-class="{ 'hidden':!item.isRequired }">*</span>
+                <span>{{item.label}}</span>
+            </label>
+            <input ng-if="item.inputType==='input'" placeholder={{item.description}} type="text" class="form-control" ng-model="item.value" />
+            <select ng-if="item.inputType==='select'" class="form-control" ng-model="item.value" ng-change="modal.editDSController.changeDataSourceType(item.value)" ng-options="dataSource for dataSource in modal.editDSController.dataSourceList">
+            </select>
+        </div>
+        <div class="modal-row" ng-repeat="item in modal.editDSController.currentDataSource">
+            <label>
+                <span class="red-pot" ng-class="{ ' hidden ':!item.isRequired}">*</span>
+                <span>{{item.label}}</span>
+            </label>
+            <input ng-if="item.inputType==='input'" type="text" placeholder={{item.description}} class="form-control" ng-model="item.value" />
+            <input ng-if="item.inputType==='password'" type="password" placeholder={{item.description}} class="form-control" ng-model="item.value" />
+            <select ng-if="item.inputType==='select'" class="form-control" ng-model="item.value" ng-change="modal.editDSController.changeDataSourceType(item.value)" ng-options="dataSource for dataSource in modal.editDSController.dataSourceList">
+            </select>
+        </div>
+        <div class="modal-footer app-modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="modal.submit()">确定</button>
+            <button class="btn btn-warning" type="button" ng-click="modal.cancel()">取消</button>
+        </div>
+    </div>

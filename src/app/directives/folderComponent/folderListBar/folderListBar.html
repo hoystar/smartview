@@ -1,0 +1,44 @@
+<div class="folder-list-bar">
+    <div class="content-box" ng-if="!folderListBar.isMinimize"> 
+    	<div class="content-toolbar">
+	    	<i class="iconfont search-bar-icon drag-icon" title="拖动窗口">&#xe620;</i>
+	        <i class="iconfont search-bar-icon mini-icon" title="最小化" ng-click="folderListBar.minimize()">&#xe61f;</i>
+        </div>
+	    <div class="search-input-box">
+			<input type="text" class="form-control search-input" placeholder="输入搜索关键字" ng-model="folderListBar.queryKey">
+	    </div>    
+
+        <div class="result-box">    
+            <div class="result-item" ng-repeat="item in folderListBar.folderBosList | filter:{'name':folderListBar.queryKey}">
+                <div ng-if="item.objectType==5">
+                    <p class="result-item-row">
+                        <a href="/page/smartview/folder?id={{item.folderId}}&status=1" target="_blank">{{item.name}}</a>
+                        <button class="drag-btn blue" ng-class="{'seleted':item.isSelected}" ng-mousedown="folderListBar.dragStart($event,item)" ng-mouseup="folderListBar.dragEnd(item)">拖动添加</button>
+                    <p class="result-item-row">
+                        <span class="field field-2">
+                            <label for="">拥有者:</label>
+                            <span class="text">{{item.owner}}</span>
+                        </span>
+                        <span class="field field-2">
+                            <label for="">创建者:</label>
+                            <span class="text">{{item.createdBy}}</span>
+                        </span>
+                    </p>
+                    <p class="result-item-row">
+                        <span class="field field-2">
+                            <label for="">父文件夹:</label>
+                            <span class="text">{{item.parentId}}</span>
+                        </span>
+                        <span class="field field-2">
+                            <label for="">创建时间:</label>
+                            <span class="text">{{item.createdOn}}</span>
+                        </span>
+                    </p>
+                </div>      
+            </div>        
+        </div>
+    </div>
+    <div class="minimize-content-box" ng-if="folderListBar.isMinimize">
+        <i class="iconfont">&#xe600;</i>
+    </div>
+</div>

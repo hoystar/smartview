@@ -1,0 +1,54 @@
+<header-bar></header-bar>
+<div class="topologyPage">
+  <topology-search data="page.graphData" selected="page.selected"></topology-search>
+  <div class="info-box">
+    <div class="item-row">
+      <h4 class="info-title">基本信息</h4>
+      <h6 class="hint-row">图中为有关系的表模型</h6>
+    </div>
+    <div class="item-row">
+      <label for="">名称：</label>
+      <span>{{page.info.showName}}</span>
+    </div>
+    <div class="item-row">
+      <label for="">描述：</label>
+      <span>{{page.info.comment}}</span>
+    </div>
+    <div class="item-row">
+      <label for="">类型：</label>
+      <span>{{page.info.type}}</span>
+    </div>
+    <div class="item-row">
+      <label for="">总表数：</label>
+      <span>{{page.info.tableTotals}}</span>
+    </div>
+    <div class="item-row">
+      <label for="">一度及以上关系表数：</label>
+      <span>{{page.info.relatedTableTotals}}</span>
+    </div>
+    <div class="item-row">
+      <label for="">二度及以上关系表数：</label>
+      <span>{{page.info.oneMoreRelTableTotals}}</span>
+    </div>
+    <div class="item-row">
+      <label for="">三度及以上关系表数：</label>
+      <span>{{page.info.twoMoreRelTableTotals}}</span>
+    </div>
+    <div class="item-row">
+      <label for="">四度及以上关系表数：</label>
+      <span>{{page.info.threeMoreRelTableTotals}}</span>
+    </div>
+    <div class="item-row" ng-if="page.selected.length!==0">
+      <h4 class="info-title">显示选中表</h4>
+      <div class="toggle" app-checkbox ng-model="page.isLocate">
+        <label></label>
+      </div>
+    </div>
+    <div class="item-row" ng-repeat="item in page.selected">
+      <span class="circle-node" ng-style="{'background-color':page.COLORS[$index]}"></span>
+      <span class="table-name">{{item.n}}</span>
+      <i class="iconfont" ng-click="page.deleteSelected(item)">&#xe623;</i>
+    </div>
+  </div>
+  <topology data="page.graphData" selected="page.selected"></topology>
+</div>

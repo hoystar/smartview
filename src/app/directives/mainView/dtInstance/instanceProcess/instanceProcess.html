@@ -1,0 +1,41 @@
+<div class="exec-explore-page">
+  <div id="task-layout-canvas" class="svg-container">
+    <loading ng-show="page.loading"></loading>
+    <div ng-show="page.errorStatus" class="errorStatus"><span>分析失败!</span></div>
+    <div task-status-dag canvas-id="page.svgCanvasId" data="page.graph" highlight-nodes="page.highlightNodes"></div>
+    
+  </div>
+  <div id="list-container" class="list-container">
+    <div class="table-container">
+      <table class="table">
+        <tr>
+          <th>
+            <label for="">任务名称</label>
+          </th>
+          <th>
+            <label for="">执行开始时间</label>
+          </th>
+          <th>
+            <label for="">执行结束时间</label>
+          </th>
+          <th>
+            <label for="">任务执行状态</label>
+          </th>
+          <th>
+            <label for="">执行日志</label>
+          </th>
+        </tr>
+        <tr ng-repeat='(key, status) in page.instMap'>
+          <th>{{status.name}}</th>
+          <th>{{page.toTimeString(status.startedOn) | dateFilter }}</th>
+          <th>{{page.toTimeString(status.completedOn) | dateFilter }}</th>
+          <th>{{page.instanceUtil.toStatusDesc(status.executedStatus)}}</th>
+          <th>
+            <span ng-if="status.executedStatus<20">－</span>
+            <span ng-if="status.executedStatus>=20"><a href="#" ng-click="page.lookLog(status.executedDetailLog)">查看</a></span>
+          </th>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,104 @@
+<header-bar></header-bar>
+<div class="tags-page">
+    <div bread-crumbs></div>
+    <div class="container">
+        <div class="base-info-box">
+            <div class="column">
+                <h4>基本信息</h4>
+                <div class="row">
+                    <label for="">标签中文名字</label>
+                    <span>{{tagsPage.tagInfo.name}}</span>
+                </div>
+                <div class="row">
+                    <label for="">标签英文名字</label>
+                    <span>{{tagsPage.tagInfo.code}}</span>
+                </div>
+                <div class="row">
+                    <label for="">标签描述</label>
+                    <span>{{tagsPage.tagInfo.description}}</span>
+                </div>
+                <div class="row">
+                    <label for="">业务分类</label>
+                    <span>-</span>
+                </div>
+                <div class="row">
+                    <label for="">来源系统</label>
+                    <span>-</span>
+                </div>
+                <div class="row">
+                    <label for="">表名</label>
+                    <span>-</span>
+                </div>
+                <div class="row">
+                    <label for="">标签字段</label>
+                    <span>-</span>
+                </div>
+                <div class="row">
+                    <label for="">创建时间</label>
+                    <span>-</span>
+                </div>
+                <div class="row">
+                    <label for="">计算机资源标识</label>
+                    <span>{{tagsPage.tagInfo.associatedFields[0].baseMetaIdentifier.dataSourceGuid}}</span>
+                </div>
+            </div>
+            <div class="column">
+                <h4>业务信息</h4>
+                <div class="row">
+                    <label for="">业务负责人</label>
+                    <span>-</span>
+                </div>
+                <div class="row">
+                    <label for="">安全接口人</label>
+                    <span>-</span>
+                </div>
+                <div class="row">
+                    <label for="">安全等级</label>
+                    <span>-</span>
+                </div>
+                <div class="row">
+                    <label for="">更新频率</label>
+                    <span>-</span>
+                </div>
+                <div class="row">
+                    <label for="">热度</label>
+                    <span>-</span>
+                </div>
+                <div class="row">
+                    <label for="">取值类型</label>
+                    <span>-</span>
+                </div>
+                <div class="row">
+                    <label for="">数据类型</label>
+                    <span>-</span>
+                </div>
+            </div>
+            <div class="column">
+                <h4>统计信息</h4>
+                <div class="row">
+                    <label for="">调用次数</label>
+                    <span>-</span>
+                </div>
+                <div class="row">
+                    <label for="">浏览次数</label>
+                    <span>-</span>
+                </div>
+                <div class="row">
+                    <label for="">收藏次数</label>
+                    <span>-</span>
+                </div>
+                <div class="row">
+                    <label for="">表数量</label>
+                    <span>-</span>
+                </div>
+            </div>
+        </div>
+        <div class="cluster-dag-box">
+            <h4>
+                <span>对应的表</span>
+                <span class="right-title">血缘关系</span>
+            </h4>
+            <div cluster-dag data="tagsPage.tagInfo.associatedFields"></div>
+        </div>
+    </div>
+</div>
